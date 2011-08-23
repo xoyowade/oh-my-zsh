@@ -1,6 +1,6 @@
 edit machine specific configurations in $HOME/.zsh-custom.sh
 
-####### Readme From oh-my-zsh #######
+h1. Readme From oh-my-zsh
 
 A handful of functions, auto-complete helpers, and stuff that makes you shout...
 
