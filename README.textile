@@ -1,3 +1,7 @@
+h3. Usage
+
+add a soft link from $HOME/.zshrc to $HOME/.oh-my-zsh/.zshrc
+
 edit machine specific configurations in $HOME/.zsh-custom.sh
 
 h1. Readme From oh-my-zsh
