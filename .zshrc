@@ -27,5 +27,5 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 ZSH_CUSTOM=$HOME/.zsh-custom.sh
-[[ -e $ZSH_CUSTOM ]] && source $ZSH_CUSTOM 
+[ -e $ZSH_CUSTOM ] && source $ZSH_CUSTOM 
 
