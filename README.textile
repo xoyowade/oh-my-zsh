@@ -1,6 +1,6 @@
 h3. Usage
 
-add a soft link from $HOME/.zshrc to $ZSH/.zshrc
+add a symbolic link from $HOME/.zshrc to $ZSH/.zshrc
 
 edit machine specific configurations in $ZSH/custom/conf.zsh
 
