@@ -22,7 +22,7 @@ then
     read line
     if [ "$line" = Y ] || [ "$line" = y ]
     then
-      /bin/sh $ZSH/tools/upgrade.sh
+      /usr/bin/env ZSH=$ZSH zsh $ZSH/tools/upgrade.sh
       # update the zsh file
       _update_zsh_update
     fi
