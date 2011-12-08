@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
+ZSH=$HOME/conf/shell/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -29,3 +29,5 @@ source $ZSH/oh-my-zsh.sh
 ZSH_CUSTOM=$ZSH/custom/conf.zsh
 [ -e $ZSH_CUSTOM ] && source $ZSH_CUSTOM 
 
+alias lla='ls -la'
+export PATH=/usr/local/Cellar/emacs/23.3a/bin:$PATH
