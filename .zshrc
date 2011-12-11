@@ -39,7 +39,6 @@ else
 fi
 
 alias lla='ls -la'
-export PATH=/usr/local/Cellar/emacs/23.3a/bin:$PATH
 
 KERNEL=`uname`
 case $KERNEL in
