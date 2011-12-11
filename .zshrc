@@ -26,8 +26,7 @@ plugins=(git osx)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-ZSH_CUSTOM=$ZSH/custom/conf.zsh
-[ -e $ZSH_CUSTOM ] && source $ZSH_CUSTOM 
+ZSH_CUSTOM=$ZSH/custom
 
 # Common config
 if [[ -n $STY || -n $TMUX ]]; then
