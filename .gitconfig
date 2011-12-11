@@ -11,4 +11,4 @@
 	email = zwxiao@gmail.com
 [core]
 [core]
-	excludesfile = /Users/xoyo/conf/.gitignore_global
+	excludesfile = ~/.gitignore_global
