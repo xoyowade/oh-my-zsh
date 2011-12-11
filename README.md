@@ -1,3 +1,5 @@
+My configurations for everyday tools
+
 ## Pre-requisitions
 
 TODO
@@ -8,14 +10,16 @@ With version 1.6.5 of Git or later:
 
     $ git clone --recursive git://github.com/xoyowade/conf.git $CONF_HOME
     $ cd $CONF_HOME
-    $ ./install.sh
+    $ ./install.sh $CONF_HOME $BAK_DIR
 
 For older Git versions, just use:
 
     $ git clone git://github.com/xoyowade/conf.git $CONF_HOME
     $ cd $CONF_HOME
     $ git submodule update --init
-    $ ./install.sh
+    $ ./install.sh $CONF_HOME $BAK_DIR
+
+install.sh will create some symbolic links to the configure files, and backup your old dot files in $BAK_DIR
 
 ### Component compilation
 

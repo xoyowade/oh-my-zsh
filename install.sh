@@ -1,6 +1,12 @@
 #!/bin/sh
-insdir=~/conf
-bakdir=~/.oldconf
+if [ $# -lt 2 ]; then
+    insdir=~/conf
+    bakdir=~/.oldconf
+else
+    insdir=$1
+    bakdir=$2
+fi
+
 rm -rf $bakdir
 mkdir -p $bakdir
 
