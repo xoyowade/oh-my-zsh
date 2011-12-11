@@ -7,9 +7,10 @@
 (eval-after-load "color-theme"
   '(progn
      (color-theme-initialize)
-     (if ((display-color-cells) 20)
+     (if (< (display-color-cells) 20)
 	 (color-theme-tty-dark)
-       (color-theme-arjen))
+       (color-theme-clarity))
 ))
 
+;; (color-theme-arjen)
 ;;; my-color-theme.el ends here
