@@ -31,3 +31,15 @@ ZSH_CUSTOM=$ZSH/custom/conf.zsh
 
 alias lla='ls -la'
 export PATH=/usr/local/Cellar/emacs/23.3a/bin:$PATH
+
+KERNEL=`uname`
+case $KERNEL in
+	Darwin*)
+		alias du1='du -h -d 1'
+		;;
+	Linux*)
+		alias du1='du -h --max-depth=1'
+		;;
+esac
+
+
