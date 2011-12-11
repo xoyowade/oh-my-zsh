@@ -1,0 +1,9 @@
+[submodule "emacs/my-plugin/rinari"]
+	path = emacs/my-plugin/rinari
+	url = git://github.com/eschulte/rinari.git
+[submodule "vim/.vim/bundle/vim-fugitive"]
+	path = vim/.vim/bundle/vim-fugitive
+	url = git://github.com/tpope/vim-fugitive.git
+[submodule "shell/.oh-my-zsh"]
+	path = shell/.oh-my-zsh
+	url = git@github.com:xoyowade/oh-my-zsh.git
