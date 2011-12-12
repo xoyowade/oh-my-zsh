@@ -7,7 +7,13 @@ else
     bakdir=$2
 fi
 
-rm -rf $bakdir
+# find a clean dir to backup
+i=0
+defdir=$bakdir
+while [ -a $bakdir -o -e $bakdir ]; do
+    i=$(($i+1))
+    bakdir="${defdir}.$i"
+done
 mkdir -p $bakdir
 
 function backup {
@@ -57,6 +63,6 @@ backup $fn
 link shell/$fn $fn
 done
 
-
+echo "Finish installing. All old config files are moved to ${bakdir}"
 
 
