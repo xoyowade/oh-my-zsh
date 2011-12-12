@@ -13,6 +13,6 @@
       (color-theme-billw))
 ))
 
-(set-default-font "Mono-13")
+(set-default-font "Mono-12")
 
 ;;; my-color-theme.el ends here
