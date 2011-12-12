@@ -4,13 +4,15 @@
 
 ;; color-theme settings
 (require 'color-theme)
+
 (eval-after-load "color-theme"
   '(progn
      (color-theme-initialize)
      (if (< (display-color-cells) 20)
 	 (color-theme-tty-dark)
-       (color-theme-clarity))
+      (color-theme-billw))
 ))
 
-;; (color-theme-arjen)
+(set-default-font "Mono-13")
+
 ;;; my-color-theme.el ends here
