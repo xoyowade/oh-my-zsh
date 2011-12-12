@@ -11,15 +11,18 @@ fi
 # find a clean dir to backup
 i=0
 defdir=$bakdir
-while [ -a $bakdir -o -e $bakdir ]; do
+while [ -e $bakdir ]; do
     i=$(($i+1))
     bakdir="${defdir}.$i"
 done
 mkdir -p $bakdir
 
 function backup {
-    if [ -a ~/$1 -o -e ~/$1 ]; then
+    if [ -e ~/$1 ]; then
 	mv -f ~/$1 $bakdir/
+    else
+	echo "try to rm $1 (unexisting file or broken link)"
+	rm -rf ~/$1
     fi
 }
 
@@ -31,7 +34,7 @@ git=(.gitconfig .gitignore_global)
 for fn in ${git[@]}
 do
 backup $fn
-link $fn $fn
+link git/$fn $fn
 done
 
 emacs=(.Xdefaults .emacs)
