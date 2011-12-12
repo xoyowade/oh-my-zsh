@@ -1,4 +1,5 @@
-#!/bin/sh
+# #!/bin/sh
+
 if [ $# -lt 2 ]; then
     insdir=~/conf
     bakdir=~/.oldconf
@@ -27,14 +28,14 @@ function link {
 }
 
 git=(.gitconfig .gitignore_global)
-for fn in $git
+for fn in ${git[@]}
 do
 backup $fn
 link $fn $fn
 done
 
 emacs=(.Xdefaults .emacs)
-for fn in $emacs
+for fn in ${emacs[@]}
 do
 backup $fn
 link emacs/$fn $fn
@@ -43,21 +44,21 @@ backup .emacshome
 link emacs .emacshome
 
 vim=(.vim .vimrc)
-for fn in $vim
+for fn in ${vim[@]}
 do
 backup $fn
 link vim/$fn $fn
 done
 
 zsh=(.zshrc .zprofile)
-for fn in $zsh
+for fn in ${zsh[@]}
 do
 backup $fn
 link shell/.oh-my-zsh/$fn $fn
 done
 
 shell=(.bashrc)
-for fn in $shell
+for fn in ${shell[@]}
 do
 backup $fn
 link shell/$fn $fn
