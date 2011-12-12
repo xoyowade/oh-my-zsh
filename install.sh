@@ -66,13 +66,15 @@ do
 backup $fn
 link shell/.oh-my-zsh/$fn $fn
 done
+touch $insdir/shell/.oh-my-zsh/custom/conf.zsh
 
-shell=(.bashrc)
+shell=(.bashrc .oh-my-zsh)
 for fn in ${shell[@]}
 do
 backup $fn
 link shell/$fn $fn
 done
+
 
 echo "Finish installing. All old config files are moved to ${bakdir}"
 
