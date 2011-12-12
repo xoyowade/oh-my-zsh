@@ -1,4 +1,4 @@
-(provide 'linux)
+(provide 'sys-linux)
 
 ;; for X Window
 ;; (defun fullscreen ()
