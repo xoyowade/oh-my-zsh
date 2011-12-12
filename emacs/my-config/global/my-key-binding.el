@@ -16,7 +16,21 @@
   (if (looking-at "\\>")
       (hippie-expand nil)
     (indent-for-tab-command))
-)
+  )
+
+(defun revert-buffer-no-confirm ()
+  "Refreshes buffer without confirmation."
+  (interactive) (revert-buffer t t)
+  (message "Refreshed buffer."))
+
+(defun revert-all-buffers ()
+  "Refreshes all open buffers from their respective files."
+  (interactive)
+  (dolist (buf (buffer-list))
+    (with-current-buffer buf
+      (when (and (buffer-file-name) (not (buffer-modified-p)))
+	(revert-buffer t t t) )))
+  (message "Refreshed open buffers.") )
 
 ;; indent and complete style
 (global-set-key [(control tab)] 'my-indent-or-complete)
@@ -25,10 +39,12 @@
 ;; Set up the delete key 
 (global-set-key [delete] 'delete-char)
 (global-set-key [kp-delete] 'delete-char)
-(global-set-key "\C-R" 'revert-buffer)
+;; refresh file
+(global-set-key "\C-R" 'revert-buffer-no-confirm)
+(global-set-key "\C-\M-R" 'revert-all-buffers)
 (global-set-key "\C-\M-g" 'compile)
-;; Marking regions by C-2
-(global-set-key (kbd "C-2") 'set-mark-command)
+;; Mark regions
+(global-set-key (kbd "C-M-2") 'set-mark-command)
 ;(global-set-key "\C-2" 'set-mark)
 
 ;;; my-key-binding.el ends here
