@@ -50,6 +50,13 @@ backup $fn
 link vim/$fn $fn
 done
 
+tmux=(.tmux.conf)
+for fn in ${tmux[@]}
+do
+backup $fn
+link tmux/$fn $fn
+done
+
 zsh=(.zshrc .zprofile)
 for fn in ${zsh[@]}
 do
