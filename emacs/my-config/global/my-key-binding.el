@@ -40,8 +40,8 @@
 (global-set-key [delete] 'delete-char)
 (global-set-key [kp-delete] 'delete-char)
 ;; refresh file
-(global-set-key "\C-R" 'revert-buffer-no-confirm)
-(global-set-key "\C-\M-R" 'revert-all-buffers)
+(global-set-key "\C-\M-r" 'revert-buffer-no-confirm)
+(global-set-key "\C-c\C-r" 'revert-all-buffers)
 (global-set-key "\C-\M-g" 'compile)
 ;; Mark regions
 (global-set-key (kbd "C-M-2") 'set-mark-command)
