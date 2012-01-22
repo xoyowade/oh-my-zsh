@@ -39,6 +39,7 @@ else
 fi
 
 alias lla='ls -la'
+alias rake="noglob rake"
 
 KERNEL=`uname`
 case $KERNEL in
