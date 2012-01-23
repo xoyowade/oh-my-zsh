@@ -7,7 +7,7 @@
 
 
 (defun octopress-new (class title)
-  (let* ((command-str (format "new_%s[\"%s\"]" class title))
+  (let* ((command-str (format "new_%s[\"%s\",true]" class title))
          (command-result (octopress-rake command-str))
          (regexp-str (format "Creating new %s: " class))
          (filename))
