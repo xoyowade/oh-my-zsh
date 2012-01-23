@@ -29,14 +29,14 @@ source $ZSH/oh-my-zsh.sh
 ZSH_CUSTOM=$ZSH/custom
 
 # Common config
-if [[ -n $STY || -n $TMUX ]]; then
-    function title() { print -Pn "\ek$1\e\\"}
-    function precmd() { title "%20<..<%~%<<" }
-    function preexec() { title "%20>..>$1%<<" }
-    #export PS1="%{${fg[cyan]}%}[%D{%H:%M} %20<..<%~%<<]%{$reset_color%} "
-else
-    #export PS1="%{${fg[cyan]}%}[%D{%H:%M} %n@%m:%20<..<%~%<<]%{$reset_color%} "
-fi
+#if [[ -n $STY || -n $TMUX ]]; then
+#    function title() { print -Pn "\ek$1\e\\"}
+#    function precmd() { title "%20<..<%~%<<" }
+#    function preexec() { title "%20>..>$1%<<" }
+#    #export PS1="%{${fg[cyan]}%}[%D{%H:%M} %20<..<%~%<<]%{$reset_color%} "
+#else
+#    #export PS1="%{${fg[cyan]}%}[%D{%H:%M} %n@%m:%20<..<%~%<<]%{$reset_color%} "
+#fi
 
 growl() { echo -e $'\e]9;'${1}'\007' ; return ; }
 
