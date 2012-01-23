@@ -38,9 +38,10 @@ else
     #export PS1="%{${fg[cyan]}%}[%D{%H:%M} %n@%m:%20<..<%~%<<]%{$reset_color%} "
 fi
 
+growl() { echo -e $'\e]9;'${1}'\007' ; return ; }
+
 alias lla='ls -la'
 alias rake="noglob rake"
-
 KERNEL=`uname`
 case $KERNEL in
 	Darwin*)
