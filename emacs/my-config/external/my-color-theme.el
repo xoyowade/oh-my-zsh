@@ -20,4 +20,6 @@
                         charset
                         "Hiragino Sans GB-18"))
 
+(setq-default line-spacing 3)
+
 ;;; my-color-theme.el ends here
