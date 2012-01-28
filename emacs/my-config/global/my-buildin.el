@@ -1,4 +1,3 @@
-(provide 'my-buildin)
 ;; start emacs server to enable emacsclient to send file
 (server-start)
 
@@ -59,3 +58,5 @@
 
 ;; linum
 (global-linum-mode t)
+
+(provide 'my-buildin)

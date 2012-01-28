@@ -13,6 +13,11 @@
       (color-theme-billw))
 ))
 
-(set-default-font "Mono-12")
+;; font
+(set-default-font "Mono-14")
+(dolist (charset '(kana han symbol cjk-misc bopomofo))
+      (set-fontset-font (frame-parameter nil 'font)
+                        charset
+                        "Hiragino Sans GB-18"))
 
 ;;; my-color-theme.el ends here
