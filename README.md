@@ -24,3 +24,8 @@ install.sh will create some symbolic links to the configure files, and backup yo
 ### Component compilation
 
 TODO
+
+### Update
+
+	$ git pull --recurse-submodules
+	$ git submodule update 
