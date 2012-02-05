@@ -17,7 +17,7 @@ For older Git versions, just use:
     $ git clone git://github.com/xoyowade/conf.git $CONF_HOME
     $ cd $CONF_HOME
     $ git submodule update --init
-    $ ./install.sh $CONF_HOME $BAK_DIR
+    $ zsh ./install.sh $CONF_HOME $BAK_DIR
 
 install.sh will create some symbolic links to the configure files, and backup your old dot files in $BAK_DIR
 
