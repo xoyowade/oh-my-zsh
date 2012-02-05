@@ -43,6 +43,8 @@ growl() { echo -e $'\e]9;'${1}'\007' ; return ; }
 alias lla='ls -la'
 alias rake='noglob rake'
 alias emacsopen='emacsclient -n -a vim'
+alias gc='git ci -am'
+
 KERNEL=`uname`
 case $KERNEL in
 	Darwin*)
