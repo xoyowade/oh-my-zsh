@@ -23,6 +23,7 @@
 (add-to-list 'load-path base-load-path)
 (add-to-list 'load-path (concat base-load-path "cscope-15.7a"))
 (add-to-list 'load-path (concat base-load-path "color-theme-6.6.0"))
+(add-to-list 'load-path (concat base-load-path "emacs-color-theme-solarized"))
 (add-to-list 'load-path (concat base-load-path "ecb-2.40.1"))
 (add-to-list 'load-path (concat base-load-path "cedet-1.0/common"))
 (add-to-list 'load-path (concat base-load-path "slime"))
