@@ -84,3 +84,6 @@ set cursorline
 " x window clipboard slows down the startup time when the x window connection is slow
 " so just disable this feature when slow
 set clipboard=exclude:.*
+
+set background=dark
+colorscheme solarized
