@@ -10,7 +10,7 @@ With version 1.6.5 of Git or later:
 
     $ git clone --recursive git://github.com/xoyowade/conf.git $CONF_HOME
     $ cd $CONF_HOME
-    $ ./install.sh $CONF_HOME $BAK_DIR
+    $ zsh ./install.sh $CONF_HOME $BAK_DIR
 
 For older Git versions, just use:
 
