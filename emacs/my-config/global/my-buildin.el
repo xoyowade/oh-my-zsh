@@ -59,4 +59,7 @@
 ;; linum
 (global-linum-mode t)
 
+;; it's more comfortable to handle long lines in visual line mode
+(add-hook 'text-mode-hook 'turn-on-visual-line-mode)
+
 (provide 'my-buildin)
