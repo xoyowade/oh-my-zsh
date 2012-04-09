@@ -76,5 +76,9 @@
 
 ;; it's more comfortable to handle long lines in visual line mode
 (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
+(global-visual-line-mode 1)
+
+;; dont't show welcome screen for me, thank you!
+(setq inhibit-startup-message t)
 
 (provide 'my-buildin)
