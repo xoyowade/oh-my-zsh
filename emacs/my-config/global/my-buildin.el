@@ -8,10 +8,25 @@
 ;; backup files
 (setq backup-directory-alist '(("" . "~/.emacs.d/.backups")))
 
-;; Desktop save mode
-(desktop-save-mode t)
-;; restore only 10 buffers at first, others will be loaded lazily
-(setq desktop-restore-eager 10)
+;; ;; override stale lock
+;; (defun emacs-process-p (pid)
+;;   "If pid is the process ID of an emacs process, return t, else nil.
+;; Also returns nil if pid is nil."
+;;   (when pid
+;;     (let ((attributes (process-attributes pid)) (cmd))
+;;       (dolist (attr attributes)
+;;         (if (string= "comm" (car attr))
+;;             (setq cmd (cdr attr))))
+;;       (if (and cmd (or (string= "emacs" cmd) (string= "emacs.exe" cmd))) t))))
+
+;; (defadvice desktop-owner (after pry-from-cold-dead-hands activate)
+;;   "Don't allow dead emacsen to own the desktop file."
+;;   (when (not (emacs-process-p ad-return-value))
+;;     (setq ad-return-value nil)))
+;; ;; restore only 10 buffers at first, others will be loaded lazily
+;; (setq desktop-restore-eager 10)
+;; ;; Desktop save mode
+;; (desktop-save-mode t)
 
 ;; ------ text processing ------ ;;
 ;; Highlight FIXME, TODO and BUG
