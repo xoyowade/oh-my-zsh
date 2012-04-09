@@ -1,6 +1,6 @@
 ;;; my-key-binding.el ---
 
-;; Author: zwxiao@ppidellsc1420
+;; Author: zwxiao
 ;; Contact: zwxiao@gmail.com
 ;; Version: $Id: key-binding.el,v 0.0 2009/04/17 04:48:09 zwxiao Exp $
 
@@ -8,8 +8,6 @@
 ;;   (require 'key-binding)
 
 ;;; Code:
-
-(provide 'my-key-binding)
 
 (defun my-indent-or-complete ()
   (interactive)
@@ -47,4 +45,15 @@
 (global-set-key (kbd "C-M-2") 'set-mark-command)
 ;(global-set-key "\C-2" 'set-mark)
 
+;; find file at cursor point
+(global-set-key "\C-x\C-g" 'find-file-at-point)
+(global-set-key "\C-xg" 'find-function)
+
+;; prefer re version
+(global-set-key "\M-%" 'query-replace-regexp)
+
+;; comment or uncomment region
+(global-set-key (kbd "C-x /") 'comment-or-uncomment-region)
+
+(provide 'my-key-binding)
 ;;; my-key-binding.el ends here
