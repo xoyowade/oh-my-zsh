@@ -38,7 +38,6 @@ else
     #export PS1="%{${fg[cyan]}%}[%D{%H:%M} %n@%m:%20<..<%~%<<]%{$reset_color%} "
 fi
 
-growl() { echo -e $'\e]9;'${1}'\007' ; return ; }
 
 alias lla='ls -la'
 alias rake='noglob rake'
@@ -49,9 +48,11 @@ alias gs='git status'
 KERNEL=`uname`
 case $KERNEL in
 	Darwin*)
+	growl() { growlnotify -m "${1}"; return ; }
 		alias du1='du -h -d 1'
 		;;
 	Linux*)
+	growl() { echo -e $'\e]9;'${1}'\007' ; return ; }
 		alias du1='du -h --max-depth=1'
 		;;
 esac
