@@ -32,14 +32,15 @@
 (add-to-list 'load-path (concat base-load-path "org-7.7/lisp"))
 (add-to-list 'load-path (concat base-load-path "org-7.7/contrib/lisp"))
 (add-to-list 'load-path (concat base-load-path "rinari"))
+(add-to-list 'load-path (concat base-load-path "workgroups"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; step 2: load external package settings                  ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-to-list 'load-path (concat base-config-path "external"))
 (require 'my-color-theme)
-;(require 'my-ecb)
-;(require 'my-cedet)
+;; (require 'my-ecb)
+;; (require 'my-cedet)
 (require 'my-redo)
 (require 'my-xcscope)
 (require 'my-slime)
@@ -48,6 +49,8 @@
 (require 'my-org)
 (require 'my-rinari)
 (require 'my-octopress)
+(require 'my-workgroups)
+;; (require 'my-desktop)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; step 3: load modes settings                             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
