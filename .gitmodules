@@ -7,3 +7,6 @@
 [submodule "shell/.oh-my-zsh"]
 	path = shell/.oh-my-zsh
 	url = git://github.com/xoyowade/oh-my-zsh.git
+[submodule "emacs/my-plugin/workgroups"]
+	path = emacs/my-plugin/workgroups
+	url = git://github.com/tlh/workgroups.el
