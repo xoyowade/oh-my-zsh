@@ -54,6 +54,8 @@ case $KERNEL in
 	Linux*)
 	growl() { echo -e $'\e]9;'${1}'\007' ; return ; }
 		alias du1='du -h --max-depth=1'
+		alias aptinstall='sudo apt-get install'
+		alias aptsearch='apt-cache search'
 		;;
 esac
 
