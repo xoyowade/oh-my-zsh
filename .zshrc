@@ -108,16 +108,16 @@ alias gs='git status'
 
 KERNEL=`uname`
 case $KERNEL in
-	Darwin*)
+    Darwin*)
 	growl() { growlnotify -m "${1}"; return ; }
-		alias du1='du -h -d 1'
-		;;
-	Linux*)
+	alias du1='du -h -d 1'
+	;;
+    Linux*)
 	growl() { echo -e $'\e]9;'${1}'\007' ; return ; }
-		alias du1='du -h --max-depth=1'
-		alias aptinstall='sudo apt-get install'
-		alias aptsearch='apt-cache search'
-		;;
+	alias du1='du -h --max-depth=1'
+	alias aptinstall='sudo apt-get install'
+	alias aptsearch='apt-cache search'
+	;;
 esac
 
 
