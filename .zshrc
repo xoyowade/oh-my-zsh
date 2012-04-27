@@ -43,15 +43,62 @@ source $ZSH/oh-my-zsh.sh
 ZSH_CUSTOM=$ZSH/custom
 
 # Common config
-if [[ -n $STY || -n $TMUX ]]; then
-    function title() { print -Pn "\ek$1\e\\"}
-    function precmd() { title "%20<..<%~%<<" }
-    function preexec() { title "%20>..>$1%<<" }
-    #export PS1="%{${fg[cyan]}%}[%D{%H:%M} %20<..<%~%<<]%{$reset_color%} "
-else
-    #export PS1="%{${fg[cyan]}%}[%D{%H:%M} %n@%m:%20<..<%~%<<]%{$reset_color%} "
-fi
 
+# Load required modules.
+autoload -U add-zsh-hook
+autoload -Uz vcs_info
+
+# if [[ -n $STY || -n $TMUX ]]; then
+#     function title() { print -Pn "\ek$1\e\\"}
+#     function precmd_title() { title "%20<..<%~%<<" }
+#     function preexec_title() { title "%20>..>$1%<<" }
+#     #export PS1="%{${fg[cyan]}%}[%D{%H:%M} %20<..<%~%<<]%{$reset_color%} "
+# else
+#     #export PS1="%{${fg[cyan]}%}[%D{%H:%M} %n@%m:%20<..<%~%<<]%{$reset_color%} "
+# fi
+if growlnotify -h &>/dev/null; then
+    function growl_precmd() {
+	if [[ ${DO_GROWL} -eq 1 ]]; then
+            # Growl notify
+            # Time after which trigger a growl notification
+            DELAY_AFTER_NOTIFICATION=5
+            
+            # Get the start time, or set it to now if not set
+            start=${PREEXEC_TIME:-`date +'%s'`}
+            stop=$(date +'%s')
+            
+            let elapsed=$stop-$start
+            
+            if [ $elapsed -gt $DELAY_AFTER_NOTIFICATION ]; then
+		growlnotify -m "took $elapsed secs" "${PREEXEC_CMD}" > /dev/null 2>&1
+            fi
+	fi
+    }
+    function growl_preexec () {
+	export PREEXEC_TIME=$(date +'%s')
+	export PREEXEC_CMD="$1"
+
+	cmd=${(z)1[(w)0]}
+	if [[ $cmd == "sudo" ]]; then
+            cmd=${(z)1[(w)2]}
+	fi
+
+	# notify only these commands
+	export DO_GROWL=0
+	GROWL_COMMANDS=(rsync scp cp ftp curl wget axel 
+	    svn git make rake bundle 
+	    sleep
+	)
+	for i in $GROWL_COMMANDS; do
+            if [[ $cmd == $i ]]; then
+		export DO_GROWL=1
+		return
+            fi
+	done
+    }
+    add-zsh-hook precmd growl_precmd
+    add-zsh-hook preexec growl_preexec
+fi
 
 alias lla='ls -la'
 alias rake='noglob rake'
