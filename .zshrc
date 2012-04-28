@@ -61,7 +61,7 @@ if growlnotify -h &>/dev/null; then
 	if [[ ${DO_GROWL} -eq 1 ]]; then
             # Growl notify
             # Time after which trigger a growl notification
-            DELAY_AFTER_NOTIFICATION=5
+            DELAY_AFTER_NOTIFICATION=3
             
             # Get the start time, or set it to now if not set
             start=${PREEXEC_TIME:-`date +'%s'`}
@@ -84,14 +84,20 @@ if growlnotify -h &>/dev/null; then
 	fi
 
 	# notify only these commands
-	export DO_GROWL=0
-	GROWL_COMMANDS=(rsync scp cp ftp curl wget axel 
-	    svn git make rake bundle 
-	    sleep
+	# export DO_GROWL=0
+	# GROWL_COMMANDS=(rsync scp cp ftp curl wget axel 
+	#     svn git make rake bundle rails
+	#     sleep
+	# )
+	export DO_GROWL=1
+	GROWL_IGNORE_COMMANDS=(vi vim emacs sudoedit 
+	    less more cat 
+	    ssh
+	    autotest service 
 	)
-	for i in $GROWL_COMMANDS; do
+	for i in $GROWL_IGNORE_COMMANDS; do
             if [[ $cmd == $i ]]; then
-		export DO_GROWL=1
+		export DO_GROWL=0
 		return
             fi
 	done
