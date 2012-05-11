@@ -91,8 +91,8 @@ if growlnotify -h &>/dev/null; then
 	# )
 	export DO_GROWL=1
 	GROWL_IGNORE_COMMANDS=(vi vim emacs sudoedit 
-	    less more cat 
-	    ssh
+	    less more cat man
+	    ssh mosh
 	    autotest service 
 	)
 	for i in $GROWL_IGNORE_COMMANDS; do
