@@ -92,7 +92,7 @@ if growlnotify -h &>/dev/null; then
 	export DO_GROWL=1
 	GROWL_IGNORE_COMMANDS=(vi vim emacs sudoedit 
 	    less more cat man
-	    ssh mosh
+	    ssh mosh tmux
 	    autotest service 
 	)
 	for i in $GROWL_IGNORE_COMMANDS; do
@@ -111,6 +111,8 @@ alias rake='noglob rake'
 alias emacsopen='emacsclient -n -a vim'
 alias gc='git ci -am'
 alias gs='git status'
+
+PATH=~/bin:$PATH
 
 KERNEL=`uname`
 case $KERNEL in
