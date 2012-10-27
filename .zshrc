@@ -22,18 +22,20 @@ ZSH_THEME="robbyrussell"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git)
+plugins_linux=(gnu-utils)
 plugins_ruby=(bundler rails3 ruby rvm)
+plugins_qq=($plugins_linux svn)
 HOST=`hostname`
 case $HOST in
     *mac)
 	plugins+=(osx)
 	if [[ "$HOST" == "xoyo-mac" ]]; then
-	    plugins=($plugins $plugins_ruby)
+	    plugins+=$plugins_ruby
 	    plugins+=(github pow)
 	fi
 	;;
-    brick*)
-	plugins+=(debian gnu-utils)
+    YinKe*)
+	plugins+=$plugins_qq
 	;;
 esac
 
@@ -41,7 +43,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 ZSH_CUSTOM=$ZSH/custom
-
+GROWL_SERVER_IP=`echo $SSH2_CLIENT | awk '{print $1}'`
 # Common config
 
 # Load required modules.
@@ -56,7 +58,7 @@ autoload -Uz vcs_info
 # else
 #     #export PS1="%{${fg[cyan]}%}[%D{%H:%M} %n@%m:%20<..<%~%<<]%{$reset_color%} "
 # fi
-if growlnotify -h &>/dev/null; then
+if growlnotify  &>/dev/null; then
     function growl_precmd() {
 	if [[ ${DO_GROWL} -eq 1 ]]; then
             # Growl notify
@@ -70,7 +72,7 @@ if growlnotify -h &>/dev/null; then
             let elapsed=$stop-$start
             
             if [ $elapsed -gt $DELAY_AFTER_NOTIFICATION ]; then
-		growlnotify -m "took $elapsed secs" "${PREEXEC_CMD}" > /dev/null 2>&1
+		growlnotify $GROWL_SERVER_IP "${PREEXEC_CMD}"  "took $elapsed secs"> /dev/null 2>&1
             fi
 	fi
     }
@@ -90,8 +92,9 @@ if growlnotify -h &>/dev/null; then
 	#     sleep
 	# )
 	export DO_GROWL=1
-	GROWL_IGNORE_COMMANDS=(vi vim emacs sudoedit 
-	    less more cat man
+	GROWL_IGNORE_COMMANDS=(
+		vi vim vimdiff emacs sudoedit 
+	    less more man gdb
 	    ssh mosh tmux
 	    autotest service 
 	)
@@ -111,8 +114,16 @@ alias rake='noglob rake'
 alias emacsopen='emacsclient -n -a vim'
 alias gc='git ci -am'
 alias gs='git status'
-
-PATH=~/bin:$PATH
+alias svn='nocorrect svn'
+alias svnhist='svn log -v -l 3'
+alias make='make -j4'
+alias m='make'
+alias grepr='grep -R'
+alias grepcode='nocorrect grepcode'
+function grepcode {
+	dir=$2
+	find $dir -path '*/.svn' -prune -o -type f -print | grep -v "cscope" | grep -v "CMakeFiles" | xargs grep -Ine $1
+}
 
 KERNEL=`uname`
 case $KERNEL in
@@ -121,11 +132,26 @@ case $KERNEL in
 	alias du1='du -h -d 1'
 	;;
     Linux*)
-	growl() { echo -e $'\e]9;'${1}'\007' ; return ; }
+	growl() { growlnotify "${1}" ""; return ; }
+	#growl() { echo -e $'\e]9;'${1}'\007' ; return ; }
 	alias du1='du -h --max-depth=1'
 	alias aptinstall='sudo apt-get install'
 	alias aptsearch='apt-cache search'
 	;;
 esac
 
+if [[ -n $STY || -n $TMUX ]]; then
+    function title() { print -Pn "\ek$1\e\\"}
+    function precmd() { title "%20<..<%~%<<" }
+    function preexec() { title "%20>..>$1%<<" }
+    export PS1="%{${fg[cyan]}%}[%D{%H:%M} %20<..<%~%<<]%{$reset_color%} "
+else
+    export PS1="%{${fg[cyan]}%}[%D{%H:%M} %n@%m:%20<..<%~%<<]%{$reset_color%} "
+fi
 
+export PATH=~/usr/bin:$PATH
+export LD_LIBRARY_PATH=~/usr/lib:$LD_LIBRARY_PATH
+export LIBRARY_PATH=~/usr/lib:$LIBRARY_PATH
+export MANPATH=~/usr/share/man:$MANPATH
+
+export EDITOR=vim
