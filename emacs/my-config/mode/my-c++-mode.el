@@ -12,14 +12,16 @@
 (provide 'my-c++-mode)
 
 ;; c++ editing style
-(defun my-c++-mode-common-hook()
-  (setq tab-width 4 indent-tabs-mode nil)
-  (c-set-style "stroustrup")
+(defun my-c++-mode-hook()
+  (c-set-offset 'case-label '0) ; case label should be at same indentation level as the switch statemento
+  ;(setq tab-width 4 indent-tabs-mode nil)
+  ;(c-set-style "bsd")
   ;; (define-key c++-mode-map [f3] 'replace-regexp)
 )
 
-(add-hook 'c++-mode-common-hook 'my-c++-mode-common-hook)
+(add-hook 'c++-mode-hook 'my-c++-mode-hook)
 
 (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.H\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.hpp\\'" . c++-mode))
 ;;; my-c++-mode.el ends here

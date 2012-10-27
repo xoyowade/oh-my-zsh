@@ -7,6 +7,8 @@
 
 ;; ccmode: these commands got from caole's .emacs file
 (require 'cc-mode)
+(require 'google-c-style)
+
 (c-set-offset 'inline-open 0)
 (c-set-offset 'friend '-)
 (c-set-offset 'substatement-open 0)
@@ -46,6 +48,8 @@
 )
 
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+(add-hook 'c-mode-common-hook 'google-set-c-style)
+(add-hook 'c-mode-common-hook 'google-make-newline-indent)
 
 (add-to-list 'auto-mode-alist '("\\.c\\'" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c-mode))
