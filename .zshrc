@@ -43,7 +43,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 ZSH_CUSTOM=$ZSH/custom
-GROWL_SERVER_IP=`echo $SSH2_CLIENT | awk '{print $1}'`
+
 # Common config
 
 # Load required modules.
@@ -58,7 +58,10 @@ autoload -Uz vcs_info
 # else
 #     #export PS1="%{${fg[cyan]}%}[%D{%H:%M} %n@%m:%20<..<%~%<<]%{$reset_color%} "
 # fi
-if growlnotify  &>/dev/null; then
+GROWL_SERVER_IP=`echo $SSH2_CLIENT | awk '{print $1}'`
+GROWL_SERVER_OPT=""
+[[ "$GROWL_SERVER_IP" = "" ]] || GROWL_SERVER_OPT="-H $GROWL_SERVER_IP"
+if growlnotify -v &>/dev/null; then
     function growl_precmd() {
 	if [[ ${DO_GROWL} -eq 1 ]]; then
             # Growl notify
@@ -72,7 +75,7 @@ if growlnotify  &>/dev/null; then
             let elapsed=$stop-$start
             
             if [ $elapsed -gt $DELAY_AFTER_NOTIFICATION ]; then
-		growlnotify $GROWL_SERVER_IP "${PREEXEC_CMD}"  "took $elapsed secs"> /dev/null 2>&1
+		growlnotify $GROWL_SERVER_OPT -t "${PREEXEC_CMD}" -m "took $elapsed secs"> /dev/null 2>&1
             fi
 	fi
     }
