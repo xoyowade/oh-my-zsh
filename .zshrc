@@ -140,19 +140,18 @@ case $KERNEL in
 	alias du1='du -h --max-depth=1'
 	alias aptinstall='sudo apt-get install'
 	alias aptsearch='apt-cache search'
+	if [[ -n $STY || -n $TMUX ]]; then
+    	function title() { print -Pn "\ek$1\e\\"}
+    	function precmd() { title "%20<..<%~%<<" }
+    	function preexec() { title "%20>..>$1%<<" }
+    	export PS1="%{${fg[cyan]}%}[%D{%H:%M} %20<..<%~%<<]%{$reset_color%} "
+	else
+	    export PS1="%{${fg[cyan]}%}[%D{%H:%M} %n@%m:%20<..<%~%<<]%{$reset_color%} "
+	fi
 	;;
 esac
 
-if [[ -n $STY || -n $TMUX ]]; then
-    function title() { print -Pn "\ek$1\e\\"}
-    function precmd() { title "%20<..<%~%<<" }
-    function preexec() { title "%20>..>$1%<<" }
-    export PS1="%{${fg[cyan]}%}[%D{%H:%M} %20<..<%~%<<]%{$reset_color%} "
-else
-    export PS1="%{${fg[cyan]}%}[%D{%H:%M} %n@%m:%20<..<%~%<<]%{$reset_color%} "
-fi
-
-export PATH=~/usr/bin:$PATH
+export PATH=~/usr/bin:/usr/local/bin:$PATH
 export LD_LIBRARY_PATH=~/usr/lib:$LD_LIBRARY_PATH
 export LIBRARY_PATH=~/usr/lib:$LIBRARY_PATH
 export MANPATH=~/usr/share/man:$MANPATH
