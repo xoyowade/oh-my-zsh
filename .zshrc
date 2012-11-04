@@ -41,9 +41,6 @@ esac
 
 source $ZSH/oh-my-zsh.sh
 
-# Customize to your needs...
-ZSH_CUSTOM=$ZSH/custom
-
 # Common config
 
 # Load required modules.
@@ -157,3 +154,7 @@ export LIBRARY_PATH=~/usr/lib:$LIBRARY_PATH
 export MANPATH=~/usr/share/man:$MANPATH
 
 export EDITOR=vim
+
+# Customize to your needs...
+ZSH_CUSTOM=$ZSH/custom
+
