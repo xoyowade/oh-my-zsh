@@ -109,6 +109,7 @@ if growlnotify -v &>/dev/null; then
     add-zsh-hook preexec growl_preexec
 fi
 
+alias l='ls -l'
 alias lla='ls -la'
 alias rake='noglob rake'
 alias emacsopen='emacsclient -n -a vim'
@@ -158,3 +159,5 @@ export EDITOR=vim
 # Customize to your needs...
 ZSH_CUSTOM=$ZSH/custom
 
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
