@@ -29,7 +29,7 @@
 (setq next-line-add-newlines nil)
 
 ;; no scroll bar
-(set-scroll-bar-mode nil)
+;(set-scroll-bar-mode nil)
 
 ;; scroll line by line
 (setq scroll-step 1)

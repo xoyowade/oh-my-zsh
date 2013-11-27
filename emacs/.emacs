@@ -14,6 +14,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; load my personal settings from conig                    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq base-path "~/.emacshome/")
 (setq base-load-path "~/.emacshome/my-plugin/")
 (setq base-config-path "~/.emacshome/my-config/")
 
@@ -33,6 +34,7 @@
 (add-to-list 'load-path (concat base-load-path "org-7.7/contrib/lisp"))
 (add-to-list 'load-path (concat base-load-path "rinari"))
 (add-to-list 'load-path (concat base-load-path "workgroups"))
+(add-to-list 'load-path (concat base-load-path "yasnippet"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; step 2: load external package settings                  ;;
@@ -47,10 +49,13 @@
 (require 'my-auto-complete)
 (require 'my-flymake)
 (require 'my-org)
+(require 'ido)
+(ido-mode t)
 (require 'my-rinari)
 (require 'my-octopress)
 (require 'my-workgroups)
-;; (require 'my-desktop)
+; (require 'my-desktop)
+(require 'my-yasnippet)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; step 3: load modes settings                             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -60,6 +65,7 @@
 (require 'my-cperl-mode)
 (require 'my-other-mode-alias)
 (require 'my-md-mode)
+(require 'my-sh-mode)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; step 4: load global settings                            ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -81,4 +81,7 @@
 ;; dont't show welcome screen for me, thank you!
 (setq inhibit-startup-message t)
 
+;; set global params
+(setq user-mail-address "zwxiao@tencent.com")
+(setq user-name "Zhiwei Xiao")
 (provide 'my-buildin)

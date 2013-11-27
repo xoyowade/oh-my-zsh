@@ -13,3 +13,6 @@
 [submodule "git/ignore"]
 	path = git/ignore
 	url = git://github.com/github/gitignore.git
+[submodule "emacs/my-plugin/yasnippet"]
+	path = emacs/my-plugin/yasnippet
+	url = git://github.com/capitaomorte/yasnippet

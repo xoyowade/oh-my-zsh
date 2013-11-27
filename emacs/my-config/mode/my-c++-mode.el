@@ -22,6 +22,7 @@
 (add-hook 'c++-mode-hook 'my-c++-mode-hook)
 
 (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.cc\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.H\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.hpp\\'" . c++-mode))
 ;;; my-c++-mode.el ends here
