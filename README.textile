@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 h3. Usage
 
 add a symbolic link from $HOME/.zshrc to $ZSH/.zshrc
@@ -8,10 +7,6 @@ edit machine specific configurations in $ZSH/custom/conf.zsh
 h1. Readme from oh-my-zsh
 
 A handful of functions, auto-complete helpers, and stuff that makes you shout...
-
-=======
-oh-my-zsh is an open source, community-driven framework for managing your ZSH configuration. It comes bundled with a ton of helpful functions, helpers, plugins, themes, and few things that make you shout...
->>>>>>> b34aee7f76c4cd37e643a330409ac580776b3837
 
 bq. "OH MY ZSHELL!"
 

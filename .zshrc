@@ -41,6 +41,9 @@ esac
 
 source $ZSH/oh-my-zsh.sh
 
+# Customize to your needs...
+ZSH_CUSTOM=$ZSH/custom
+
 # Common config
 
 # Load required modules.
@@ -115,6 +118,7 @@ alias rake='noglob rake'
 alias emacsopen='emacsclient -n -a vim'
 alias gc='git ci -am'
 alias gs='git status'
+alias grepr='grep -R'
 alias svn='nocorrect svn'
 alias svnhist='svn log -v -l 3'
 alias make='make -j4'
@@ -123,7 +127,7 @@ alias grepr='grep -R'
 alias grepcode='nocorrect grepcode'
 function grepcode {
 	dir=$2
-	find $dir -path '*/.svn' -prune -o -type f -print | grep -v "cscope" | grep -v "CMakeFiles" | xargs grep -Ine $1
+	find -L $dir -path '*/.svn' -prune-o -type f -print | grep -v "cscope" | grep -v "CMakeFiles" | xargs grep -Ine $1
 }
 
 KERNEL=`uname`
@@ -149,10 +153,12 @@ case $KERNEL in
 	;;
 esac
 
-export PATH=~/usr/bin:/usr/local/bin:$PATH
-export LD_LIBRARY_PATH=~/usr/lib:$LD_LIBRARY_PATH
-export LIBRARY_PATH=~/usr/lib:$LIBRARY_PATH
-export MANPATH=~/usr/share/man:$MANPATH
+export PATH=$HOME/usr/local/bin:/usr/local/bin:$PATH
+export LD_LIBRARY_PATH=$HOME/usr/local/lib:$LD_LIBRARY_PATH
+export LIBRARY_PATH=$HOME/usr/local/lib:$LIBRARY_PATH
+export MANPATH=$HOME/usr/local/share/man:$MANPATH
+export C_INCLUDE_PATH=$HOME/usr/local/include:$C_INCLUDE_PATH
+export CPLUS_INCLUDE_PATH=$HOME/usr/local/include:$CPLUS_INCLUDE_PATH
 
 export EDITOR=vim
 
@@ -160,4 +166,4 @@ export EDITOR=vim
 ZSH_CUSTOM=$ZSH/custom
 
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
