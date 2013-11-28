@@ -153,7 +153,7 @@ esac
 export PATH=$HOME/usr/local/bin:$PATH
 export LD_LIBRARY_PATH=$HOME/usr/local/lib:$LD_LIBRARY_PATH
 export LIBRARY_PATH=$HOME/usr/local/lib:$LIBRARY_PATH
-export MANPATH=$HOME/usr/local/share/man:$MANPATH
+export MANPATH=$HOME/usr/local/share:$MANPATH
 export C_INCLUDE_PATH=$HOME/usr/local/include:$C_INCLUDE_PATH
 export CPLUS_INCLUDE_PATH=$HOME/usr/local/include:$CPLUS_INCLUDE_PATH
 
