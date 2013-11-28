@@ -66,7 +66,8 @@ do
 backup $fn
 link shell/.oh-my-zsh/$fn $fn
 done
-touch $insdir/shell/.oh-my-zsh/custom/conf.zsh
+touch ~/.conf.zsh
+touch ~/conf.zsh $insdir/shell/.oh-my-zsh/custom/conf.zsh
 
 shell=(.bashrc .oh-my-zsh)
 for fn in ${shell[@]}
