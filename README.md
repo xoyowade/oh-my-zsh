@@ -28,4 +28,4 @@ TODO
 ### Update
 
 	$ git pull --recurse-submodules
-	$ git submodule update 
+	$ git submodule update --recursive
