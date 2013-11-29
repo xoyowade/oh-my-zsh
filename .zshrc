@@ -45,6 +45,14 @@ source $ZSH/oh-my-zsh.sh
 
 # Common config
 
+# setup paths
+export PATH=$HOME/usr/local/bin:$HOME/tools:$PATH
+export LD_LIBRARY_PATH=$HOME/usr/local/lib:$LD_LIBRARY_PATH
+export LIBRARY_PATH=$HOME/usr/local/lib:$LIBRARY_PATH
+export MANPATH=$HOME/usr/local/share/man:$MANPATH
+export C_INCLUDE_PATH=$HOME/usr/local/include:$C_INCLUDE_PATH
+export CPLUS_INCLUDE_PATH=$HOME/usr/local/include:$CPLUS_INCLUDE_PATH
+
 # Load required modules.
 autoload -U add-zsh-hook
 autoload -Uz vcs_info
@@ -57,9 +65,10 @@ autoload -Uz vcs_info
 # else
 #     #export PS1="%{${fg[cyan]}%}[%D{%H:%M} %n@%m:%20<..<%~%<<]%{$reset_color%} "
 # fi
-GROWL_SERVER_IP=`echo $SSH2_CLIENT | awk '{print $1}'`
+SSH_CLIENT_IP=`echo $SSH_CLIENT $SSH2_CLIENT | awk '{print $1}'`
+GROWL_HOST=${GROWL_HOST_IP:=$SSH_CLIENT_IP} 
 GROWL_SERVER_OPT=""
-[[ "$GROWL_SERVER_IP" = "" ]] || GROWL_SERVER_OPT="-H $GROWL_SERVER_IP"
+[[ "$GROWL_HOST" = "" ]] || GROWL_SERVER_OPT="-H $GROWL_HOST"
 if growlnotify -v &>/dev/null; then
     function growl_precmd() {
 	if [[ ${DO_GROWL} -eq 1 ]]; then
@@ -166,13 +175,6 @@ case $KERNEL in
 	fi
 	;;
 esac
-
-export PATH=$HOME/usr/local/bin:$PATH
-export LD_LIBRARY_PATH=$HOME/usr/local/lib:$LD_LIBRARY_PATH
-export LIBRARY_PATH=$HOME/usr/local/lib:$LIBRARY_PATH
-export MANPATH=$HOME/usr/local/share/man:$MANPATH
-export C_INCLUDE_PATH=$HOME/usr/local/include:$C_INCLUDE_PATH
-export CPLUS_INCLUDE_PATH=$HOME/usr/local/include:$CPLUS_INCLUDE_PATH
 
 export EDITOR=vim
 
