@@ -111,6 +111,24 @@ if growlnotify -v &>/dev/null; then
     add-zsh-hook preexec growl_preexec
 fi
 
+# ssh-agent
+AGENT_SSH=$HOME/.agent.sh
+test=`ps ux | grep ssh-agent | grep -v grep | awk '{print $2}' | xargs`
+
+if [ "$test" = "" ]; then
+   # there is no agent running
+   if [ -e "${AGENT_SSH}" ]; then
+      # remove the old file
+      rm -f ${AGENT_SSH}
+   fi;
+   # start a new agent
+   ssh-agent -s | grep -v echo >&${AGENT_SSH}
+fi;
+
+test -e ${AGENT_SSH} && source ${AGENT_SSH}
+
+alias kagent="kill -9 $SSH_AGENT_PID"
+
 alias l='ls -l'
 alias lla='ls -la'
 alias rake='noglob rake'
