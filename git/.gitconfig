@@ -17,3 +17,5 @@
 	trustExitCode = true
 [core]
 	excludesfile = ~/.gitignore_global
+[push]
+	default = matching  # [TODO] for old version, change to simple later
