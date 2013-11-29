@@ -143,9 +143,9 @@ case $KERNEL in
     	function title() { print -Pn "\ek$1\e\\"}
     	function precmd() { title "%20<..<%~%<<" }
     	function preexec() { title "%20>..>$1%<<" }
-    	export PS1="%{${fg[cyan]}%}[%D{%H:%M} %20<..<%~%<<]%{$reset_color%} "
+    	#export PS1="%{${fg[cyan]}%}[%D{%H:%M} %20<..<%~%<<]%{$reset_color%} "
 	else
-	    export PS1="%{${fg[cyan]}%}[%D{%H:%M} %n@%m:%20<..<%~%<<]%{$reset_color%} "
+	    #export PS1="%{${fg[cyan]}%}[%D{%H:%M} %n@%m:%20<..<%~%<<]%{$reset_color%} "
 	fi
 	;;
 esac
