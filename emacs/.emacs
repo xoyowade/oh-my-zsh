@@ -51,7 +51,6 @@
 (require 'my-org)
 (require 'ido)
 (ido-mode t)
-(require 'my-rinari)
 (require 'my-octopress)
 (require 'my-workgroups)
 ; (require 'my-desktop)

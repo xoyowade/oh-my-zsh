@@ -13,3 +13,5 @@
 ;; for more information.
 (define-key (keymap-parent local-function-key-map) [S-tab] nil) 
 
+;; Rails IDE
+(require 'my-rinari)
