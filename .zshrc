@@ -118,10 +118,9 @@ alias emacsopen='emacsclient -n -a vim'
 alias gc='git ci -am'
 alias gs='git status'
 alias grepr='grep -R'
+alias grepcode='nocorrect grepcode'
 alias svn='nocorrect svn'
 alias svnhist='svn log -v -l 3'
-alias grepr='grep -R'
-alias grepcode='nocorrect grepcode'
 function grepcode {
 	dir=$2
 	find -L $dir -path '*/.svn' -prune -o -type f -print | grep -v "cscope" | grep -v "CMakeFiles" | xargs grep -Ine $1
