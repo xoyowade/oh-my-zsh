@@ -65,10 +65,9 @@ autoload -Uz vcs_info
 # else
 #     #export PS1="%{${fg[cyan]}%}[%D{%H:%M} %n@%m:%20<..<%~%<<]%{$reset_color%} "
 # fi
-SSH_CLIENT_IP=`echo $SSH_CLIENT $SSH2_CLIENT | awk '{print $1}'`
-GROWL_HOST=${GROWL_HOST_IP:=$SSH_CLIENT_IP} 
-GROWL_SERVER_OPT=""
-[[ "$GROWL_HOST" = "" ]] || GROWL_SERVER_OPT="-H $GROWL_HOST"
+
+# growl notification for long waiting command
+GROWL_HOST_CONF=$HOME/.growl_host
 if growlnotify -v &>/dev/null; then
     function growl_precmd() {
 	if [[ ${DO_GROWL} -eq 1 ]]; then
@@ -83,6 +82,9 @@ if growlnotify -v &>/dev/null; then
             let elapsed=$stop-$start
             
             if [ $elapsed -gt $DELAY_AFTER_NOTIFICATION ]; then
+        # get latest growl host ip
+        GROWL_HOST=`cat $GROWL_HOST_CONF`
+        [[ "$GROWL_HOST" = "" ]] || GROWL_SERVER_OPT="-H $GROWL_HOST"
 		growlnotify $GROWL_SERVER_OPT -t "${PREEXEC_CMD}" -m "took $elapsed secs"> /dev/null 2>&1
             fi
 	fi
