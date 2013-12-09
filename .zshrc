@@ -45,6 +45,14 @@ source $ZSH/oh-my-zsh.sh
 
 # Common config
 
+# setup paths
+export PATH=$HOME/usr/local/bin:$HOME/tools:$PATH
+export LD_LIBRARY_PATH=$HOME/usr/local/lib:$LD_LIBRARY_PATH
+export LIBRARY_PATH=$HOME/usr/local/lib:$LIBRARY_PATH
+export MANPATH=$HOME/usr/local/share/man:$MANPATH
+export C_INCLUDE_PATH=$HOME/usr/local/include:$C_INCLUDE_PATH
+export CPLUS_INCLUDE_PATH=$HOME/usr/local/include:$CPLUS_INCLUDE_PATH
+
 # Load required modules.
 autoload -U add-zsh-hook
 autoload -Uz vcs_info
@@ -57,9 +65,9 @@ autoload -Uz vcs_info
 # else
 #     #export PS1="%{${fg[cyan]}%}[%D{%H:%M} %n@%m:%20<..<%~%<<]%{$reset_color%} "
 # fi
-GROWL_SERVER_IP=`echo $SSH2_CLIENT | awk '{print $1}'`
-GROWL_SERVER_OPT=""
-[[ "$GROWL_SERVER_IP" = "" ]] || GROWL_SERVER_OPT="-H $GROWL_SERVER_IP"
+
+# growl notification for long waiting command
+GROWL_HOST_CONF=$HOME/.growl_host
 if growlnotify -v &>/dev/null; then
     function growl_precmd() {
 	if [[ ${DO_GROWL} -eq 1 ]]; then
@@ -74,6 +82,9 @@ if growlnotify -v &>/dev/null; then
             let elapsed=$stop-$start
             
             if [ $elapsed -gt $DELAY_AFTER_NOTIFICATION ]; then
+        # get latest growl host ip
+        GROWL_HOST=`cat $GROWL_HOST_CONF`
+        [[ "$GROWL_HOST" = "" ]] || GROWL_SERVER_OPT="-H $GROWL_HOST"
 		growlnotify $GROWL_SERVER_OPT -t "${PREEXEC_CMD}" -m "took $elapsed secs"> /dev/null 2>&1
             fi
 	fi
@@ -111,6 +122,24 @@ if growlnotify -v &>/dev/null; then
     add-zsh-hook preexec growl_preexec
 fi
 
+# ssh-agent
+AGENT_SSH=$HOME/.agent.sh
+test=`ps ux | grep ssh-agent | grep -v grep | awk '{print $2}' | xargs`
+
+if [ "$test" = "" ]; then
+   # there is no agent running
+   if [ -e "${AGENT_SSH}" ]; then
+      # remove the old file
+      rm -f ${AGENT_SSH}
+   fi;
+   # start a new agent
+   ssh-agent -s | grep -v echo >&${AGENT_SSH}
+fi;
+
+test -e ${AGENT_SSH} && source ${AGENT_SSH}
+
+alias kagent="kill -9 $SSH_AGENT_PID"
+
 alias l='ls -l'
 alias lla='ls -la'
 alias rake='noglob rake'
@@ -118,10 +147,9 @@ alias emacsopen='emacsclient -n -a vim'
 alias gc='git ci -am'
 alias gs='git status'
 alias grepr='grep -R'
+alias grepcode='nocorrect grepcode'
 alias svn='nocorrect svn'
 alias svnhist='svn log -v -l 3'
-alias grepr='grep -R'
-alias grepcode='nocorrect grepcode'
 function grepcode {
 	dir=$2
 	find -L $dir -path '*/.svn' -prune -o -type f -print | grep -v "cscope" | grep -v "CMakeFiles" | xargs grep -Ine $1
@@ -143,19 +171,12 @@ case $KERNEL in
     	function title() { print -Pn "\ek$1\e\\"}
     	function precmd() { title "%20<..<%~%<<" }
     	function preexec() { title "%20>..>$1%<<" }
-    	export PS1="%{${fg[cyan]}%}[%D{%H:%M} %20<..<%~%<<]%{$reset_color%} "
+    	#export PS1="%{${fg[cyan]}%}[%D{%H:%M} %20<..<%~%<<]%{$reset_color%} "
 	else
-	    export PS1="%{${fg[cyan]}%}[%D{%H:%M} %n@%m:%20<..<%~%<<]%{$reset_color%} "
+	    #export PS1="%{${fg[cyan]}%}[%D{%H:%M} %n@%m:%20<..<%~%<<]%{$reset_color%} "
 	fi
 	;;
 esac
-
-export PATH=$HOME/usr/local/bin:$PATH
-export LD_LIBRARY_PATH=$HOME/usr/local/lib:$LD_LIBRARY_PATH
-export LIBRARY_PATH=$HOME/usr/local/lib:$LIBRARY_PATH
-export MANPATH=$HOME/usr/local/share/man:$MANPATH
-export C_INCLUDE_PATH=$HOME/usr/local/include:$C_INCLUDE_PATH
-export CPLUS_INCLUDE_PATH=$HOME/usr/local/include:$CPLUS_INCLUDE_PATH
 
 export EDITOR=vim
 
