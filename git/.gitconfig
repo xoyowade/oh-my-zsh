@@ -18,5 +18,4 @@
 [core]
 	excludesfile = ~/.gitignore_global
 [push]
-  # [TODO] for old version, change to simple later
-	default = matching  
+	default = matching
