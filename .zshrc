@@ -46,12 +46,13 @@ source $ZSH/oh-my-zsh.sh
 # Common config
 
 # setup paths
-export PATH=$HOME/usr/local/bin:$HOME/tools:$PATH
-export LD_LIBRARY_PATH=$HOME/usr/local/lib:$LD_LIBRARY_PATH
-export LIBRARY_PATH=$HOME/usr/local/lib:$LIBRARY_PATH
-export MANPATH=$HOME/usr/local/share/man:$MANPATH
-export C_INCLUDE_PATH=$HOME/usr/local/include:$C_INCLUDE_PATH
-export CPLUS_INCLUDE_PATH=$HOME/usr/local/include:$CPLUS_INCLUDE_PATH
+OPT_HOME=$HOME/usr/local
+export PATH=$OPT_HOME/bin:$HOME/tools:$PATH
+export LD_LIBRARY_PATH=$OPT_HOME/lib:$LD_LIBRARY_PATH
+export LIBRARY_PATH=$OPT_HOME/lib:$LIBRARY_PATH
+export MANPATH=$OPT_HOME/share/man:$MANPATH
+export C_INCLUDE_PATH=$OPT_HOME/include:$C_INCLUDE_PATH
+export CPLUS_INCLUDE_PATH=$OPT_HOME/include:$CPLUS_INCLUDE_PATH
 
 # Load required modules.
 autoload -U add-zsh-hook
