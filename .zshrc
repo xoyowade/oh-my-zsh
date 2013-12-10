@@ -98,12 +98,7 @@ if growlnotify -v &>/dev/null; then
             cmd=${(z)1[(w)2]}
 	fi
 
-	# notify only these commands
-	# export DO_GROWL=0
-	# GROWL_COMMANDS=(rsync scp cp ftp curl wget axel 
-	#     svn git make rake bundle rails
-	#     sleep
-	# )
+	# ignore these commands
 	export DO_GROWL=1
 	GROWL_IGNORE_COMMANDS=(
 		vi vim vimdiff emacs sudoedit 
