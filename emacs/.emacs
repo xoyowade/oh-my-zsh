@@ -65,6 +65,7 @@
 (require 'my-other-mode-alias)
 (require 'my-md-mode)
 (require 'my-sh-mode)
+(require 'my-compile-log-mode)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; step 4: load global settings                            ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
