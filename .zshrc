@@ -71,7 +71,7 @@ autoload -Uz vcs_info
 GROWL_HOST_CONF=$HOME/.growl_host
 if growlnotify -v &>/dev/null; then
     function growl_precmd() {
-	if [[ ${DO_GROWL} -eq 1 ]]; then
+	    if [[ ${DO_GROWL} -eq 1 ]]; then
             # Growl notify
             # Time after which trigger a growl notification
             DELAY_AFTER_NOTIFICATION=3
@@ -83,36 +83,39 @@ if growlnotify -v &>/dev/null; then
             let elapsed=$stop-$start
             
             if [ $elapsed -gt $DELAY_AFTER_NOTIFICATION ]; then
-        # get latest growl host ip
-        GROWL_HOST=`cat $GROWL_HOST_CONF`
-        [[ "$GROWL_HOST" = "" ]] || GROWL_SERVER_OPT="-H $GROWL_HOST"
-		growlnotify $GROWL_SERVER_OPT -t "${PREEXEC_CMD}" -m "took $elapsed secs"> /dev/null 2>&1
+                # get latest growl host ip
+                GROWL_HOST=`cat $GROWL_HOST_CONF`
+                [[ "$GROWL_HOST" = "" ]] || GROWL_SERVER_OPT="-H $GROWL_HOST"
+                CMD_INFO="Success!"
+                [[ $PREEXEC_CMD_STATUS -ne 0 ]] && CMD_INFO="Failed :(" 
+	            growlnotify $GROWL_SERVER_OPT -t "$CMD_INFO" -m "[${PREEXEC_CMD}] took $elapsed secs"> /dev/null 2>&1
             fi
-	fi
+	    fi
     }
     function growl_preexec () {
-	export PREEXEC_TIME=$(date +'%s')
-	export PREEXEC_CMD="$1"
+        export PREEXEC_CMD_STATUS=$?
+	    export PREEXEC_TIME=$(date +'%s')
+	    export PREEXEC_CMD="$1"
 
-	cmd=${(z)1[(w)0]}
-	if [[ $cmd == "sudo" ]]; then
+	    cmd=${(z)1[(w)0]}
+	    if [[ $cmd == "sudo" ]]; then
             cmd=${(z)1[(w)2]}
-	fi
+	    fi
 
-	# ignore these commands
-	export DO_GROWL=1
-	GROWL_IGNORE_COMMANDS=(
-		vi vim vimdiff emacs sudoedit 
-	    less more man gdb
-	    ssh mosh tmux
-	    autotest service 
-	)
-	for i in $GROWL_IGNORE_COMMANDS; do
+	    # ignore these commands
+	    export DO_GROWL=1
+	    GROWL_IGNORE_COMMANDS=(
+	    	vi vim vimdiff emacs sudoedit 
+	        less more man gdb
+	        ssh mosh tmux
+	        autotest service 
+	    )
+	    for i in $GROWL_IGNORE_COMMANDS; do
             if [[ $cmd == $i ]]; then
-		export DO_GROWL=0
-		return
+	   	        export DO_GROWL=0
+	   	        return
             fi
-	done
+	    done
     }
     add-zsh-hook precmd growl_precmd
     add-zsh-hook preexec growl_preexec
@@ -177,3 +180,5 @@ esac
 export EDITOR=vim
 
 export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+unsetopt nomatch
