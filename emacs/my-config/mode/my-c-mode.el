@@ -19,7 +19,7 @@
   ;; hungry-delete and auto-newline
   (c-toggle-hungry-state 1)
   (hs-minor-mode)
-  (setq c-basic-offset 2)
+  (setq c-basic-offset 4)
   ;; binding key
   (define-key c-mode-base-map (kbd "C-c h") 'hs-hide-block)
   (define-key c-mode-base-map (kbd "C-c u") 'hs-show-block)

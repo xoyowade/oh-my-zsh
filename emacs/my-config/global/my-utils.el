@@ -17,3 +17,7 @@
   (goto-char (point-min))
   (while (search-forward "\n" nil t) (replace-match "\r\n")))
 
+(defun reload-dotemacs-file ()
+  "reload your .emacs file without restarting Emacs"
+  (interactive)
+  (load-file "~/.emacs"))
