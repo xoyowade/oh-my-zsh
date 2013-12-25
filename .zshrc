@@ -39,12 +39,20 @@ case $HOST in
 	;;
 esac
 
-source $ZSH/oh-my-zsh.sh
-
 # Customize to your needs...
 ZSH_CUSTOM=$ZSH/custom
+source $ZSH/oh-my-zsh.sh
 
 # Common config
+
+# setup paths
+OPT_HOME=$HOME/usr/local
+export PATH=$OPT_HOME/bin:$HOME/tools:$PATH
+export LD_LIBRARY_PATH=$OPT_HOME/lib:$LD_LIBRARY_PATH
+export LIBRARY_PATH=$OPT_HOME/lib:$LIBRARY_PATH
+export MANPATH=$OPT_HOME/share/man:$MANPATH
+export C_INCLUDE_PATH=$OPT_HOME/include:$C_INCLUDE_PATH
+export CPLUS_INCLUDE_PATH=$OPT_HOME/include:$CPLUS_INCLUDE_PATH
 
 # Load required modules.
 autoload -U add-zsh-hook
@@ -58,12 +66,12 @@ autoload -Uz vcs_info
 # else
 #     #export PS1="%{${fg[cyan]}%}[%D{%H:%M} %n@%m:%20<..<%~%<<]%{$reset_color%} "
 # fi
-GROWL_SERVER_IP=`echo $SSH2_CLIENT | awk '{print $1}'`
-GROWL_SERVER_OPT=""
-[[ "$GROWL_SERVER_IP" = "" ]] || GROWL_SERVER_OPT="-H $GROWL_SERVER_IP"
+
+# growl notification for long waiting command
+GROWL_HOST_CONF=$HOME/.growl_host
 if growlnotify -v &>/dev/null; then
     function growl_precmd() {
-	if [[ ${DO_GROWL} -eq 1 ]]; then
+	    if [[ ${DO_GROWL} -eq 1 ]]; then
             # Growl notify
             # Time after which trigger a growl notification
             DELAY_AFTER_NOTIFICATION=3
@@ -75,42 +83,61 @@ if growlnotify -v &>/dev/null; then
             let elapsed=$stop-$start
             
             if [ $elapsed -gt $DELAY_AFTER_NOTIFICATION ]; then
-		growlnotify $GROWL_SERVER_OPT -t "${PREEXEC_CMD}" -m "took $elapsed secs"> /dev/null 2>&1
+                # get latest growl host ip
+                GROWL_HOST=`cat $GROWL_HOST_CONF`
+                [[ "$GROWL_HOST" = "" ]] || GROWL_SERVER_OPT="-H $GROWL_HOST"
+                CMD_INFO="Success!"
+                [[ $PREEXEC_CMD_STATUS -ne 0 ]] && CMD_INFO="Failed :(" 
+	            growlnotify $GROWL_SERVER_OPT -t "$CMD_INFO" -m "[${PREEXEC_CMD}] took $elapsed secs"> /dev/null 2>&1
             fi
-	fi
+	    fi
     }
     function growl_preexec () {
-	export PREEXEC_TIME=$(date +'%s')
-	export PREEXEC_CMD="$1"
+        export PREEXEC_CMD_STATUS=$?
+	    export PREEXEC_TIME=$(date +'%s')
+	    export PREEXEC_CMD="$1"
 
-	cmd=${(z)1[(w)0]}
-	if [[ $cmd == "sudo" ]]; then
+	    cmd=${(z)1[(w)0]}
+	    if [[ $cmd == "sudo" ]]; then
             cmd=${(z)1[(w)2]}
-	fi
+	    fi
 
-	# notify only these commands
-	# export DO_GROWL=0
-	# GROWL_COMMANDS=(rsync scp cp ftp curl wget axel 
-	#     svn git make rake bundle rails
-	#     sleep
-	# )
-	export DO_GROWL=1
-	GROWL_IGNORE_COMMANDS=(
-		vi vim vimdiff emacs sudoedit 
-	    less more man gdb
-	    ssh mosh tmux
-	    autotest service 
-	)
-	for i in $GROWL_IGNORE_COMMANDS; do
+	    # ignore these commands
+	    export DO_GROWL=1
+	    GROWL_IGNORE_COMMANDS=(
+	    	vi vim vimdiff emacs sudoedit 
+	        less more man gdb
+	        ssh mosh tmux
+	        autotest service 
+	    )
+	    for i in $GROWL_IGNORE_COMMANDS; do
             if [[ $cmd == $i ]]; then
-		export DO_GROWL=0
-		return
+	   	        export DO_GROWL=0
+	   	        return
             fi
-	done
+	    done
     }
     add-zsh-hook precmd growl_precmd
     add-zsh-hook preexec growl_preexec
 fi
+
+# ssh-agent
+AGENT_SSH=$HOME/.agent.sh
+test=`ps ux | grep ssh-agent | grep -v grep | awk '{print $2}' | xargs`
+
+if [ "$test" = "" ]; then
+   # there is no agent running
+   if [ -e "${AGENT_SSH}" ]; then
+      # remove the old file
+      rm -f ${AGENT_SSH}
+   fi;
+   # start a new agent
+   ssh-agent -s | grep -v echo >&${AGENT_SSH}
+fi;
+
+test -e ${AGENT_SSH} && source ${AGENT_SSH}
+
+alias kagent="kill -9 $SSH_AGENT_PID"
 
 alias l='ls -l'
 alias lla='ls -la'
@@ -119,15 +146,12 @@ alias emacsopen='emacsclient -n -a vim'
 alias gc='git ci -am'
 alias gs='git status'
 alias grepr='grep -R'
+alias grepcode='nocorrect grepcode'
 alias svn='nocorrect svn'
 alias svnhist='svn log -v -l 3'
-alias make='make -j4'
-alias m='make'
-alias grepr='grep -R'
-alias grepcode='nocorrect grepcode'
 function grepcode {
 	dir=$2
-	find -L $dir -path '*/.svn' -prune-o -type f -print | grep -v "cscope" | grep -v "CMakeFiles" | xargs grep -Ine $1
+	find -L $dir -path '*/.svn' -prune -o -type f -print | grep -v "cscope" | grep -v "CMakeFiles" | xargs grep -Ine $1
 }
 
 KERNEL=`uname`
@@ -146,24 +170,15 @@ case $KERNEL in
     	function title() { print -Pn "\ek$1\e\\"}
     	function precmd() { title "%20<..<%~%<<" }
     	function preexec() { title "%20>..>$1%<<" }
-    	export PS1="%{${fg[cyan]}%}[%D{%H:%M} %20<..<%~%<<]%{$reset_color%} "
+    	#export PS1="%{${fg[cyan]}%}[%D{%H:%M} %20<..<%~%<<]%{$reset_color%} "
 	else
-	    export PS1="%{${fg[cyan]}%}[%D{%H:%M} %n@%m:%20<..<%~%<<]%{$reset_color%} "
+	    #export PS1="%{${fg[cyan]}%}[%D{%H:%M} %n@%m:%20<..<%~%<<]%{$reset_color%} "
 	fi
 	;;
 esac
 
-export PATH=$HOME/usr/local/bin:/usr/local/bin:$PATH
-export LD_LIBRARY_PATH=$HOME/usr/local/lib:$LD_LIBRARY_PATH
-export LIBRARY_PATH=$HOME/usr/local/lib:$LIBRARY_PATH
-export MANPATH=$HOME/usr/local/share/man:$MANPATH
-export C_INCLUDE_PATH=$HOME/usr/local/include:$C_INCLUDE_PATH
-export CPLUS_INCLUDE_PATH=$HOME/usr/local/include:$CPLUS_INCLUDE_PATH
-
 export EDITOR=vim
 
-# Customize to your needs...
-ZSH_CUSTOM=$ZSH/custom
-
-
 export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+unsetopt nomatch
