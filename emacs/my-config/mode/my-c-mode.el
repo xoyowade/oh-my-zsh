@@ -5,7 +5,6 @@
 ;; Version: $Id: c-mode.el,v 0.0 2009/04/17 02:54:15 zwxiao Exp $
 (provide 'my-c-mode)
 
-;; ccmode: these commands got from caole's .emacs file
 (require 'cc-mode)
 (require 'google-c-style)
 
