@@ -1,14 +1,10 @@
 # name: file header
 # key: head
 # --
-/**
- * @brief   : $0
- *
- * @author  : `user-mail-address`
- * @date    : `(format-time-string "%Y-%m-%d")`
- * @version : 1.0
- * @changes :
- *    <author>        <time>        <version>        <desc>
- *  `user-name`     `(format-time-string "%Y.%m.%d")`         1.0           Create
- *
- */
+/******************************************************************************/
+// Synopsys CONFIDENTIAL -- This is an unpublished, proprietary work            
+// of Synopsys, Inc., and is fully protected under copyright and trade          
+// secret laws. You may not view, use, disclose, copy, or distribute            
+// this file or any information contained herein except pursuant to a           
+// valid written license from Synopsys.                                         
+/******************************************************************************/
