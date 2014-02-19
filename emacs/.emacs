@@ -27,14 +27,15 @@
 (add-to-list 'load-path (concat base-load-path "emacs-color-theme-solarized"))
 (add-to-list 'load-path (concat base-load-path "ecb-2.40.1"))
 (add-to-list 'load-path (concat base-load-path "cedet-1.0/common"))
-(add-to-list 'load-path (concat base-load-path "slime"))
-(add-to-list 'load-path (concat base-load-path "slime/contrib"))
+;(add-to-list 'load-path (concat base-load-path "slime"))
+;(add-to-list 'load-path (concat base-load-path "slime/contrib"))
 (add-to-list 'load-path (concat base-load-path "auto-complete"))
 (add-to-list 'load-path (concat base-load-path "org-7.7/lisp"))
 (add-to-list 'load-path (concat base-load-path "org-7.7/contrib/lisp"))
 (add-to-list 'load-path (concat base-load-path "rinari"))
 (add-to-list 'load-path (concat base-load-path "workgroups"))
 (add-to-list 'load-path (concat base-load-path "yasnippet"))
+(add-to-list 'load-path (concat base-load-path "undo-tree"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; step 2: load external package settings                  ;;
@@ -45,7 +46,7 @@
 ;; (require 'my-cedet)
 (require 'my-redo)
 (require 'my-xcscope)
-(require 'my-slime)
+;(require 'my-slime)
 (require 'my-auto-complete)
 (require 'my-flymake)
 (require 'my-org)
