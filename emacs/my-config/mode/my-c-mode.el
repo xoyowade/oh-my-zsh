@@ -5,12 +5,8 @@
 ;; Version: $Id: c-mode.el,v 0.0 2009/04/17 02:54:15 zwxiao Exp $
 (provide 'my-c-mode)
 
-(require 'cc-mode)
+;(require 'cc-mode)
 (require 'google-c-style)
-
-(c-set-offset 'inline-open 0)
-(c-set-offset 'friend '-)
-(c-set-offset 'substatement-open 0)
 
 ;; c/c++ editing style
 (defun my-c-mode-common-hook()
@@ -44,6 +40,13 @@
   (setq show-trailing-whitespace t)
   ;; comment multi-line start with *
   (setq comment-multi-line t)
+
+  ;; auto load which funtion mode
+  (which-func-mode t)
+
+;  (c-set-offset 'inline-open 0)
+;  (c-set-offset 'friend '-)
+;  (c-set-offset 'substatement-open 0)
 )
 
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)

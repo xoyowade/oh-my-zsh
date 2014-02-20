@@ -54,7 +54,7 @@
 (ido-mode t)
 (require 'my-octopress)
 (require 'my-workgroups)
-; (require 'my-desktop)
+;; (require 'my-desktop)
 (require 'my-yasnippet)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; step 3: load modes settings                             ;;
@@ -103,3 +103,4 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  )
+

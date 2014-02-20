@@ -18,6 +18,9 @@
   (setq c-basic-offset 4)
   ;(c-set-style "bsd")
   ;; (define-key c++-mode-map [f3] 'replace-regexp)
+
+  ;; auto load which funtion mode
+  (which-func-mode t)
 )
 
 (add-hook 'c++-mode-hook 'my-c++-mode-hook)
