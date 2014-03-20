@@ -36,6 +36,7 @@
 (add-to-list 'load-path (concat base-load-path "workgroups"))
 (add-to-list 'load-path (concat base-load-path "yasnippet"))
 (add-to-list 'load-path (concat base-load-path "undo-tree"))
+(add-to-list 'load-path (concat base-load-path "p4.el"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; step 2: load external package settings                  ;;
@@ -56,6 +57,7 @@
 (require 'my-workgroups)
 ;; (require 'my-desktop)
 (require 'my-yasnippet)
+(require 'my-p4)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; step 3: load modes settings                             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
