@@ -19,3 +19,6 @@
 [submodule "emacs/my-plugin/undo-tree"]
 	path = emacs/my-plugin/undo-tree
 	url = http://www.dr-qubit.org/git/undo-tree.git
+[submodule "emacs/my-plugin/p4.el"]
+	path = emacs/my-plugin/p4.el
+	url = git@github.com:gareth-rees/p4.el.git

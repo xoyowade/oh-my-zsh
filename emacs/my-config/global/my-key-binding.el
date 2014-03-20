@@ -61,5 +61,8 @@
 (global-set-key (kbd "M-b") 'backward-symbol)
 (global-set-key (kbd "M-f") 'forward-symbol) 
 
+;; rectangle/vertical insert
+(global-set-key "\C-xri" 'string-insert-rectangle)
+
 (provide 'my-key-binding)
 ;;; my-key-binding.el ends here

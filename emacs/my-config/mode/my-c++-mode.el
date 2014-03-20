@@ -11,9 +11,11 @@
 
 (provide 'my-c++-mode)
 
+(require 'google-c-style)
+
 ;; c++ editing style
 (defun my-c++-mode-hook()
-  (c-set-offset 'case-label '0) ; case label should be at same indentation level as the switch statemento
+  (c-set-offset 'access-label '-) ; public/private label
   (setq tab-width 4 indent-tabs-mode nil)
   (setq c-basic-offset 4)
   ;(c-set-style "bsd")
