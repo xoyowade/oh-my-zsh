@@ -64,5 +64,9 @@
 ;; rectangle/vertical insert
 (global-set-key "\C-xri" 'string-insert-rectangle)
 
+;; bind buffer to window 
+(global-set-key "\C-c\C-b" 'toggle-window-dedicated)
+
 (provide 'my-key-binding)
 ;;; my-key-binding.el ends here
+
