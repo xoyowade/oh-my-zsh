@@ -46,6 +46,7 @@ source $ZSH/oh-my-zsh.sh
 # Common config
 
 # setup paths
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./
 OPT_HOME=$HOME/usr/local
 export PATH=$OPT_HOME/bin:$HOME/tools:$PATH
 export LD_LIBRARY_PATH=$OPT_HOME/lib:$LD_LIBRARY_PATH
@@ -85,10 +86,10 @@ if growlnotify -v &>/dev/null; then
             if [ $elapsed -gt $DELAY_AFTER_NOTIFICATION ]; then
                 # get latest growl host ip
                 GROWL_HOST=`cat $GROWL_HOST_CONF`
-                [[ "$GROWL_HOST" = "" ]] || GROWL_SERVER_OPT="-H $GROWL_HOST"
+                [[ "$GROWL_HOST" = "" ]] && GROWL_HOST="`echo $SSH_CLIENT | cut -f1 -d' '`"
                 CMD_INFO="Success!"
                 [[ $PREEXEC_CMD_STATUS -ne 0 ]] && CMD_INFO="Failed :(" 
-	            growlnotify $GROWL_SERVER_OPT -t "$CMD_INFO" -m "[${PREEXEC_CMD}] took $elapsed secs"> /dev/null 2>&1
+	            growlnotify -H $GROWL_HOST -t "$CMD_INFO" -m "[${PREEXEC_CMD}] took $elapsed secs"> /dev/null 2>&1
             fi
 	    fi
     }
@@ -139,16 +140,28 @@ test -e ${AGENT_SSH} && source ${AGENT_SSH}
 
 alias kagent="kill -9 $SSH_AGENT_PID"
 
+# shell
 alias l='ls -l'
 alias lla='ls -la'
-alias rake='noglob rake'
-alias emacsopen='emacsclient -n -a vim'
-alias gc='git ci -am'
-alias gs='git status'
+alias cdc='cd `pwd`'
+# code 
 alias grepr='grep -R'
 alias grepcode='nocorrect grepcode'
+alias rake='noglob rake'
+alias emacsopen='emacsclient -n -a vim'
+# git
+alias gc='git ci -am'
+alias gs='git status'
+# svn
 alias svn='nocorrect svn'
 alias svnhist='svn log -v -l 3'
+# tools
+alias asm='objdump -D -j .text'
+alias nmc='nm -C'
+alias hdc='hexdump -C'
+
+function mkc() { mkdir "$@" && cd "$_"; }
+
 function grepcode {
 	dir=$2
 	find -L $dir -path '*/.svn' -prune -o -type f -print | grep -v "cscope" | grep -v "CMakeFiles" | xargs grep -Ine $1
