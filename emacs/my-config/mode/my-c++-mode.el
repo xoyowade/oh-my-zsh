@@ -18,6 +18,7 @@
   (c-set-offset 'access-label '-) ; public/private label
   (setq tab-width 4 indent-tabs-mode nil)
   (setq c-basic-offset 4)
+  (c-set-offset 'inextern-lang '4) ; extern block
   ;(c-set-style "bsd")
   ;; (define-key c++-mode-map [f3] 'replace-regexp)
 
