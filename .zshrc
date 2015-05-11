@@ -54,6 +54,7 @@ export LIBRARY_PATH=$OPT_HOME/lib:$LIBRARY_PATH
 export MANPATH=$OPT_HOME/share/man:$MANPATH
 export C_INCLUDE_PATH=$OPT_HOME/include:$C_INCLUDE_PATH
 export CPLUS_INCLUDE_PATH=$OPT_HOME/include:$CPLUS_INCLUDE_PATH
+export PYTHONPATH=$OPT_HOME/python:$PYTHONPATH
 
 # Load required modules.
 autoload -U add-zsh-hook
