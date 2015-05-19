@@ -68,7 +68,10 @@
 (global-set-key "\C-c\C-b" 'toggle-window-dedicated)
 
 ;; fix enter key in -nw mode
-(global-set-key (kbd "\r") [return])
+;(global-set-key (kbd "RET") [return])
+
+;; open the coresponding include or src file
+(global-set-key "\C-c\C-f" 'open-include-or-src-file)
 
 (provide 'my-key-binding)
 ;;; my-key-binding.el ends here

@@ -63,3 +63,31 @@
      "Window '%s' is normal")
    (current-buffer)))
 
+
+(defun change-to-src-filename (fn)
+  (setq new-fn 
+	(when (string-match "/include/" fn)
+	  (replace-match "/src/" nil nil fn)))
+  (when (string-match ".h$" new-fn)
+	  (replace-match ".cc" nil nil new-fn))
+)
+
+(defun change-to-include-filename (fn)
+  (setq new-fn 
+	(when (string-match "/src/" fn)
+	  (replace-match "/include/" nil nil fn)))
+  (when (string-match ".cc$" new-fn)
+	  (replace-match ".h" nil nil new-fn))
+)
+
+(defun change-filename-include-or-src (fn)
+  (if (string-match "/include/" fn)
+      (change-to-src-filename fn)
+      (change-to-include-filename fn))
+)
+
+(defun open-include-or-src-file ()
+  "Open the coresponding include or src file"
+  (interactive)
+  (find-file (change-filename-include-or-src buffer-file-name))
+  (message (change-filename-include-or-src buffer-file-name)))
