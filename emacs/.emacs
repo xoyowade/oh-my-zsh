@@ -54,10 +54,11 @@
 (require 'ido)
 (ido-mode t)
 (require 'my-octopress)
-(require 'my-workgroups)
+;(require 'my-workgroups)
 ;; (require 'my-desktop)
 (require 'my-yasnippet)
-(require 'my-p4)
+;(require 'my-p4)
+(require 'my-package)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; step 3: load modes settings                             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -106,3 +107,4 @@
   ;; If there is more than one, they won't work right.
  )
 
+(require 'my-workgroups)

@@ -19,7 +19,7 @@
 ;; turn on font-lock mode
 (global-font-lock-mode t)
 
-;; enable visual feedback on selections
+; enable visual feedback on selections
 (setq-default transient-mark-mode t)
 
 ;; always end a file with a newline
@@ -64,4 +64,4 @@
 
 ;; I don't like toolbar that big...
 (tool-bar-mode -1)
-;;; my-window-style.el ends here
+;; my-window-style.el ends here

@@ -31,7 +31,11 @@
 
 (defun revert-buffer-no-confirm ()
   "Refreshes buffer without confirmation."
-  (interactive) (revert-buffer t t)
+  (interactive) 
+  (setq ori-filename buffer-file-name)
+  (kill-this-buffer)
+  ;(revert-buffer t t)
+  (find-file ori-filename)
   (message "Refreshed buffer."))
 
 (defun revert-all-buffers ()
@@ -89,5 +93,7 @@
 (defun open-include-or-src-file ()
   "Open the coresponding include or src file"
   (interactive)
-  (find-file (change-filename-include-or-src buffer-file-name))
-  (message (change-filename-include-or-src buffer-file-name)))
+  (setq open-file-name (change-filename-include-or-src buffer-file-name))
+  (if (file-exists-p open-file-name)
+    (find-file open-file-name)
+    (message (concat open-file-name " does not exist"))))
