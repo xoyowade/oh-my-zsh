@@ -60,7 +60,7 @@ backup $fn
 link tmux/$fn $fn
 done
 
-zsh=(.zshrc .zprofile)
+zsh=(.zshrc .zprofile .zshenv)
 for fn in ${zsh[@]}
 do
 backup $fn
