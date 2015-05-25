@@ -48,7 +48,7 @@ source $ZSH/oh-my-zsh.sh
 # setup paths
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./
 OPT_HOME=$HOME/usr/local
-export PATH=$OPT_HOME/bin:$HOME/tools:$PATH
+export PATH=$OPT_HOME/bin:$HOME/utils/bin:$PATH
 export LD_LIBRARY_PATH=$OPT_HOME/lib:$LD_LIBRARY_PATH
 export LIBRARY_PATH=$OPT_HOME/lib:$LIBRARY_PATH
 export MANPATH=$OPT_HOME/share/man:$MANPATH
