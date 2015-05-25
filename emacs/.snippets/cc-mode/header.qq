@@ -1,0 +1,14 @@
+# name: file header
+# key: head.qq
+# --
+/**
+ * @brief   : $0
+ *
+ * @author  : `user-mail-address`
+ * @date    : `(format-time-string "%Y-%m-%d")`
+ * @version : 1.0
+ * @changes :
+ *    <author>        <time>        <version>        <desc>
+ *  `user-name`     `(format-time-string "%Y.%m.%d")`         1.0           Create
+ *
+ */

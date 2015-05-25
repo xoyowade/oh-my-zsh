@@ -1,0 +1,7 @@
+(require 'octopress)
+(global-set-key "\C-con" 'octopress-new-post)
+(global-set-key "\C-cop" 'octopress-new-page)
+(global-set-key "\C-cog" 'octopress-generate)
+(global-set-key "\C-cod" 'octopress-deploy)
+(global-set-key "\C-coa" 'octopress-gen-deploy)
+(provide 'my-octopress)

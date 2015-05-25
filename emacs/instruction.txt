@@ -1,0 +1,169 @@
+C: control M: alt(一般情况是的, 但是左右自己试一下)
+C-x k	关闭一个buffer
+C-x C-b 察看所有的buffer
+C-x 1	使得当前窗口变到最大, 1表示窗口的数目
+C-x m	打开一个buffer写邮件
+C-c C-s 发送上面写好的邮件
+C-n	下一行
+C-p	上一行
+C-f	前进一个字符
+C-b	后退一个字符
+M-f	前进一个word
+M-b	后退一个word
+C-d	删除point [1]后面的字符
+C-a 	到一行的句首
+C-e	到一行的句尾
+M-a	到一句的句首
+M-e	到一句的句尾
+M-g 	前往某一行
+C-x C-v 找另外一个文件(比如一个文件你开错了, 然后你想开另外一个文件, 就可以用这个命令)
+C-x C-s 保存这个buffer到其对应的文件
+C-x C-w 保存这个buffer到一个指定的文件
+C-x C-c 退出Emacs
+C-x C-f 寻找一个文件, 并打开一个相应的buffer
+M-x man 然后输入要man的entry, 就能显示了, 爽...
+C-s 	往前搜寻
+C-r 	往回搜寻
+C-g  	也可以用来结束搜寻。
+C-w	剪切
+M-w	拷贝
+C-y	粘贴
+<Return>结束搜寻。
+Esc v 	往上移一頁 
+Ctrl-v 	往下移一頁 
+Esc < 	移到檔案最前面 
+Esc > 	移到檔案最後面 
+Esc a 	移到敘述(statement)最前面 
+Esc e 	移到敘述最後面 
+Esc C-a / C-M-a 移到Function最前面 
+Esc C-e / C-M-e 移到Function最後面
+Esc C-f / C-M-f 移动到匹配括号对最前面
+Esc C-b / C-M-b 移动到匹配括号对最后面
+C-M-d: 进入到下一级结构里
+C-M-u: 进入到上一级结构里
+
+ESC ; 	在Emacs的C mode中按下'ESC ;'就會出現註解符號/* 及*/。並且在編輯時會自動幫你換行。
+ESC-!	(shell-command)
+ESC- 	(shell-command-on-region) 
+针对某一特定区域执行shell command mode 的 shell 指令。 
+(特定区域，是指缓冲区的某一范围(region)而言，所以此指令只是 针对缓冲区的某一部分运作的资料，) 
+Ctrl-u ESC-! 	与 Ctrl-u ESC- 在 ESC 前加上 Ctrl-u ，可以将 shell 指令执行的结果，输出到 游标所在的位置。 
+shell mode 
+ESC-x shell\indexESC-x shell 是唤起 shell mode的指令。 
+
+C-x o	在多个窗口之间切换
+c-h ...	帮助某一个主题
+例如: c-h m 就是帮助mode这个主题
+
+
+cscope:
+C-c s a             设定初始化的目录，一般是你代码的根目录
+C-s s I             对目录中的相关文件建立列表并进行索引
+
+相关指令
+C-c s s             序找符号
+C-c s g             寻找全局的定义
+C-c s c             看看指定函数被哪些函数所调用
+C-c s C             看看指定函数调用了哪些函数
+C-c s e             寻找正则表达式
+C-c s f             寻找文件
+C-c s i             看看指定的文件被哪些文件include
+C-c h               hide一个block
+C-c u               show一个block
+
+ecb:
+ecb的命令都是用: C-c . 开始的
+
+有四个窗口:
+1.directory(d)
+2.source(s)
+3.method(m)
+4.history(h)
+
+C-c . g [d/s/m/h] 	跳到某一个窗口
+C-c . g number		跳回到编辑窗口
+C-c . l w		关闭窗口, 再输入一次就是打开
+C-h i mecb		察看说明文档
+C-c . p 		回到history中上一个buffer
+C-c . n			到history中下一个buffer
+
+专题:
+1. emacs里怎么实现redo
+方法1:
+emacs本身没有redo命令，当然你可以去下载一个redo的扩展来安装上。但是可以利用emacs的undo机制来实现redo的功能，当你undo时发现可能需要redo，则此时键入任意一个字符，再undo就实现了redo的功能。举例说明，假如你键入了以下内容： 
+比如你在文档中键入了 
+
+	this is my test. 
+
+然后你按了两次undo，则变成了 
+
+	this is my tes 
+
+而后你又后悔你的undo了，你可以先键入一个任意字符，成为如下： 
+
+	this is my tes1 
+
+然后再undo三次，就是 
+
+	this is my test. 
+方法2: 直接装一个redo.el, 这个被包含在elisp这个包下面, 然后设置一下.emacs就可以用了
+
+新的一些用法
+C-x h 选中整个buffer
+C-c C-e preprocess选中的buffer
+C-M-\ 整理选中代码
+C-k 删除当前行后面的
+C-u C-SPACE 回到上一个标记
+C-c C-SPACE pop-gobal-mark
+C-x C-h 显示C-x的所有binding
+C-c C-h 显示C-c的所有binding
+C-c s u 返回原来的函数
+C-M-g 编译
+C-x ~ 编译后跳到错的地方
+C-h b 显示当前mode下所有的binding
+ispell-minor-mode,会查所有的spell拼写
+选中需要检查的段,M-x,输入ispell-region,就会检查了.
+C-g 等于 ESC ESC ESC
+C-x 0 取消当前buffer
+
+To spell-check the whole of your document, use, from anywhere in the document the Meta-x ispell-buffer command. You may as well only run the checking on a region in your document: 
+
+
+Mark the beginning of the region with Ctrl-Spc (mark-set-command), 
+Go to the end of the region to check, 
+type Meta-x ispell-region. 
+Emacs then runs Ispell. Upon meeting an unknown word, this one shows you said word (usually highlighted) and prompts you for a key: 
+
+
+spc accepts the word, this time only, 
+i accepts the word and inserts it in your personal dictionary, 
+a accepts the word for this session, 
+A accepts the word for this file, and inserts it in the local file dictionary 
+r allows you to correct the word by hand 
+R allows you to correct all the occurrences of the misspelled word, 
+x stops the checking, and puts the cursor back in place, 
+X stops the checking and leaves the cursor where it is, letting you correct your file; you will be able to continue the spell-checking later if you type Meta-x ispell-continue, 
+? gives you online help. 
+If ispell finds one or several words close to the unknown one, it will show them in a little window, each one of them preceded by a digit. Just type this digit to replace the misspelled word with the corresponding word. 
+
+
+5.4 Personal dictionary versus local file dictionary 
+The i key will let you insert a word in your personal dictionary, whereas A will let you insert a word in the local file dictionary. 
+
+
+The local file dictionary is a sequence of words inserted at the end of the file, as comments, reread by Ispell each time it is run on the file. This way, you can accept some words, acceptable in this file, but not necessarily acceptable in other files. 
+
+
+As far as I am concerned, I think it is better that the personal dictionary be reserved for words the main dictionary doesn't know but which belong to the language (like hyphenated words), plus some common words like proper nouns or others (like Linux), if they don't look too much like a real word of the main dictionary; adding too many words in the personal dictionary, such as first names, may be dangerous, because they may look like a word of the language (one can imagine Ispell being mystified on the following: `When the going gets tof, the tof get going 
+
+Tof is a French abbreviation for the first name Christophe.
+'!). 
+
+5.5 Typing spell-checking 
+Ispell can spell-check your file while you're typing. You need to use ispell-minor-mode for this. To start it or stop it, type Meta-x ispell-minor-mode. Ispell will beep you each time you type a word it doesn't know. 
+
+
+If those beeps hassle you (or your roommate is taking a nap), you can replace those annoying beeps with a flash on the screen, with the command Meta-x set-variable RET visible-bell RET t RET. You can add the following line in your .emacs and silence Emacs forever: 
+
+
+       (setq visible-bell t)

@@ -1,0 +1,24 @@
+[submodule "emacs/my-plugin/rinari"]
+	path = emacs/my-plugin/rinari
+	url = git://github.com/eschulte/rinari.git
+[submodule "vim/.vim/bundle/vim-fugitive"]
+	path = vim/.vim/bundle/vim-fugitive
+	url = git://github.com/tpope/vim-fugitive.git
+[submodule "shell/.oh-my-zsh"]
+	path = shell/.oh-my-zsh
+	url = git://github.com/xoyowade/oh-my-zsh.git
+[submodule "emacs/my-plugin/workgroups"]
+	path = emacs/my-plugin/workgroups
+	url = git://github.com/tlh/workgroups.el
+[submodule "git/ignore"]
+	path = git/ignore
+	url = git://github.com/github/gitignore.git
+[submodule "emacs/my-plugin/yasnippet"]
+	path = emacs/my-plugin/yasnippet
+	url = git://github.com/capitaomorte/yasnippet
+[submodule "emacs/my-plugin/undo-tree"]
+	path = emacs/my-plugin/undo-tree
+	url = http://www.dr-qubit.org/git/undo-tree.git
+[submodule "emacs/my-plugin/p4.el"]
+	path = emacs/my-plugin/p4.el
+	url = git@github.com:gareth-rees/p4.el.git

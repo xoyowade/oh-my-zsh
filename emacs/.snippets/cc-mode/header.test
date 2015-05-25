@@ -1,0 +1,24 @@
+# name: top description with header included for gtest
+# key: headt
+# --
+/**
+ * @brief   : Test for ${1:`(setq abc (replace-regexp-in-string "_test$" "" (file-name-nondirectory (file-name-sans-extension buffer-file-name))))`}
+ *
+ * @author  : `user-mail-address`
+ * @date    : `(format-time-string "%Y-%m-%d")`
+ * @version : 1.0
+ * @changes :
+ *    <author>        <time>        <version>        <desc>
+ *  `user-name`     `(format-time-string "%Y.%m.%d")`         1.0           Create
+ *
+ */
+
+#include "$1.hpp"
+
+#include <gtest/gtest.h>
+
+TEST(`(replace-regexp-in-string "_" "" (upcase-initials abc))`Test, $0)
+{
+
+}
+
