@@ -21,7 +21,7 @@ ZSH_THEME="robbyrussell"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=(git history-substring-search)
 plugins_linux=(gnu-utils)
 plugins_ruby=(bundler rails3 ruby rvm)
 plugins_qq=($plugins_linux svn)
@@ -36,6 +36,9 @@ case $HOST in
 	;;
     YinKe*)
 	plugins+=$plugins_qq
+    ;;
+    rnd01*)
+    plugins+=$plugins_qq
 	;;
 esac
 
@@ -48,7 +51,7 @@ source $ZSH/oh-my-zsh.sh
 # setup paths
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./
 OPT_HOME=$HOME/usr/local
-export PATH=$OPT_HOME/bin:$HOME/tools:$PATH
+export PATH=$OPT_HOME/bin:$HOME/utils/bin:$PATH
 export LD_LIBRARY_PATH=$OPT_HOME/lib:$LD_LIBRARY_PATH
 export LIBRARY_PATH=$OPT_HOME/lib:$LIBRARY_PATH
 export MANPATH=$OPT_HOME/share/man:$MANPATH
