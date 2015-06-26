@@ -164,6 +164,8 @@ alias m='make -j4'
 
 function mkc() { mkdir "$@" && cd "$_"; }
 
+function rmq() { rm -rf $@ & }
+
 function grepcode {
 	dir=$2
 	find -L $dir -path '*/.svn' -prune -o -type f -print | grep -v "cscope" | grep -v "CMakeFiles" | xargs grep -Ine $1
