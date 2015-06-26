@@ -160,6 +160,7 @@ alias svnhist='svn log -v -l 3'
 alias asm='objdump -D -j .text'
 alias nmc='nm -C'
 alias hdc='hexdump -C'
+alias m='make -j4'
 
 function mkc() { mkdir "$@" && cd "$_"; }
 
