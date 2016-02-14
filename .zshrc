@@ -46,13 +46,15 @@ source $ZSH/oh-my-zsh.sh
 # Common config
 
 # setup paths
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:./
 OPT_HOME=$HOME/usr/local
-export PATH=$OPT_HOME/bin:$HOME/tools:$PATH
+export PATH=$OPT_HOME/bin:$HOME/utils/bin:$PATH
 export LD_LIBRARY_PATH=$OPT_HOME/lib:$LD_LIBRARY_PATH
 export LIBRARY_PATH=$OPT_HOME/lib:$LIBRARY_PATH
 export MANPATH=$OPT_HOME/share/man:$MANPATH
 export C_INCLUDE_PATH=$OPT_HOME/include:$C_INCLUDE_PATH
 export CPLUS_INCLUDE_PATH=$OPT_HOME/include:$CPLUS_INCLUDE_PATH
+export PYTHONPATH=$OPT_HOME/python:$PYTHONPATH
 
 # Load required modules.
 autoload -U add-zsh-hook
@@ -88,10 +90,10 @@ if growlnotify -v &>/dev/null; then
             if [ $elapsed -gt $DELAY_AFTER_NOTIFICATION ]; then
                 # get latest growl host ip
                 GROWL_HOST=`cat $GROWL_HOST_CONF 2>/dev/null`
-                [[ "$GROWL_HOST" = "" ]] || GROWL_SERVER_OPT="-H $GROWL_HOST"
+                [[ "$GROWL_HOST" = "" ]] && GROWL_HOST="`echo $SSH_CLIENT | cut -f1 -d' '`"
                 CMD_INFO="Success!"
                 [[ $PREEXEC_CMD_STATUS -ne 0 ]] && CMD_INFO="Failed :(" 
-	            growlnotify $GROWL_SERVER_OPT -t "$CMD_INFO" -m "[${PREEXEC_CMD}] took $elapsed secs"> /dev/null 2>&1
+	            growlnotify -H $GROWL_HOST -t "$CMD_INFO" -m "[${PREEXEC_CMD}] took $elapsed secs"> /dev/null 2>&1
             fi
 	    fi
     }
@@ -142,16 +144,28 @@ test -e ${AGENT_SSH} && source ${AGENT_SSH}
 
 alias kagent="kill -9 $SSH_AGENT_PID"
 
+# shell
 alias l='ls -l'
 alias lla='ls -la'
-alias rake='noglob rake'
-alias emacsopen='emacsclient -n -a vim'
-alias gc='git ci -am'
-alias gs='git status'
+alias cdc='cd `pwd`'
+# code 
 alias grepr='grep -R'
 alias grepcode='nocorrect grepcode'
+alias rake='noglob rake'
+alias emacsopen='emacsclient -n -a vim'
+# git
+alias gc='git ci -am'
+alias gs='git status'
+# svn
 alias svn='nocorrect svn'
 alias svnhist='svn log -v -l 3'
+# tools
+alias asm='objdump -D -j .text'
+alias nmc='nm -C'
+alias hdc='hexdump -C'
+
+function mkc() { mkdir "$@" && cd "$_"; }
+
 function grepcode {
 	dir=$2
 	find -L $dir -path '*/.svn' -prune -o -type f -print | grep -v "cscope" | grep -v "CMakeFiles" | xargs grep -Ine $1
@@ -185,3 +199,17 @@ export EDITOR=vim
 export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 unsetopt nomatch
+
+# ASCII colors
+RCol='\e[0m'    # Text Reset
+# Regular           Bold                Underline           High Intensity      BoldHigh Intens     Background          High Intensity Backgrounds
+Bla='\e[0;30m';     BBla='\e[1;30m';    UBla='\e[4;30m';    IBla='\e[0;90m';    BIBla='\e[1;90m';   On_Bla='\e[40m';    On_IBla='\e[0;100m';
+Red='\e[0;31m';     BRed='\e[1;31m';    URed='\e[4;31m';    IRed='\e[0;91m';    BIRed='\e[1;91m';   On_Red='\e[41m';    On_IRed='\e[0;101m';
+Gre='\e[0;32m';     BGre='\e[1;32m';    UGre='\e[4;32m';    IGre='\e[0;92m';    BIGre='\e[1;92m';   On_Gre='\e[42m';    On_IGre='\e[0;102m';
+Yel='\e[0;33m';     BYel='\e[1;33m';    UYel='\e[4;33m';    IYel='\e[0;93m';    BIYel='\e[1;93m';   On_Yel='\e[43m';    On_IYel='\e[0;103m';
+Blu='\e[0;34m';     BBlu='\e[1;34m';    UBlu='\e[4;34m';    IBlu='\e[0;94m';    BIBlu='\e[1;94m';   On_Blu='\e[44m';    On_IBlu='\e[0;104m';
+Pur='\e[0;35m';     BPur='\e[1;35m';    UPur='\e[4;35m';    IPur='\e[0;95m';    BIPur='\e[1;95m';   On_Pur='\e[45m';    On_IPur='\e[0;105m';
+Cya='\e[0;36m';     BCya='\e[1;36m';    UCya='\e[4;36m';    ICya='\e[0;96m';    BICya='\e[1;96m';   On_Cya='\e[46m';    On_ICya='\e[0;106m';
+Whi='\e[0;37m';     BWhi='\e[1;37m';    UWhi='\e[4;37m';    IWhi='\e[0;97m';    BIWhi='\e[1;97m';   On_Whi='\e[47m';    On_IWhi='\e[0;107m';
+
+source ~/.conf.zsh
