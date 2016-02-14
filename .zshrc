@@ -58,6 +58,9 @@ export CPLUS_INCLUDE_PATH=$OPT_HOME/include:$CPLUS_INCLUDE_PATH
 autoload -U add-zsh-hook
 autoload -Uz vcs_info
 
+# disable Software Flow Control (CTRL-S CTRL-Q binding)
+stty -ixon
+
 # if [[ -n $STY || -n $TMUX ]]; then
 #     function title() { print -Pn "\ek$1\e\\"}
 #     function precmd_title() { title "%20<..<%~%<<" }
@@ -84,7 +87,7 @@ if growlnotify -v &>/dev/null; then
             
             if [ $elapsed -gt $DELAY_AFTER_NOTIFICATION ]; then
                 # get latest growl host ip
-                GROWL_HOST=`cat $GROWL_HOST_CONF`
+                GROWL_HOST=`cat $GROWL_HOST_CONF 2>/dev/null`
                 [[ "$GROWL_HOST" = "" ]] || GROWL_SERVER_OPT="-H $GROWL_HOST"
                 CMD_INFO="Success!"
                 [[ $PREEXEC_CMD_STATUS -ne 0 ]] && CMD_INFO="Failed :(" 
