@@ -63,6 +63,9 @@ export PYTHONPATH=$OPT_HOME/python:$PYTHONPATH
 autoload -U add-zsh-hook
 autoload -Uz vcs_info
 
+# disable Software Flow Control (CTRL-S CTRL-Q binding)
+stty -ixon
+
 # if [[ -n $STY || -n $TMUX ]]; then
 #     function title() { print -Pn "\ek$1\e\\"}
 #     function precmd_title() { title "%20<..<%~%<<" }
@@ -89,7 +92,7 @@ if growlnotify -v &>/dev/null; then
             
             if [ $elapsed -gt $DELAY_AFTER_NOTIFICATION ]; then
                 # get latest growl host ip
-                GROWL_HOST=`cat $GROWL_HOST_CONF`
+                GROWL_HOST=`cat $GROWL_HOST_CONF 2>/dev/null`
                 [[ "$GROWL_HOST" = "" ]] && GROWL_HOST="`echo $SSH_CLIENT | cut -f1 -d' '`"
                 CMD_INFO="Success!"
                 [[ $PREEXEC_CMD_STATUS -ne 0 ]] && CMD_INFO="Failed :(" 
@@ -148,6 +151,7 @@ alias kagent="kill -9 $SSH_AGENT_PID"
 alias l='ls -l'
 alias lla='ls -la'
 alias cdc='cd `pwd`'
+alias utf8='iconv -f gbk -t UTF-8 '
 # code 
 alias grepr='grep -R'
 alias grepcode='nocorrect grepcode'
@@ -159,16 +163,30 @@ alias gs='git status'
 # svn
 alias svn='nocorrect svn'
 alias svnhist='svn log -v -l 3'
+alias svnaddall='svn status | grep "?" | sed "s/^.* /svn add /" | bash'
+# alias svnreset='svn revert . -R && svn status | awk '/^?/{$1 = "rm -rf"; print $0}'
 # tools
 alias asm='objdump -D -j .text'
 alias nmc='nm -C'
 alias hdc='hexdump -C'
+alias m='make -j4'
+alias rsyncr='rsync -r --progress --compress --stats'
+alias chmodr='chmod a+rwX -R'
 
 function mkc() { mkdir "$@" && cd "$_"; }
+
+function rmq() { rm -rf $@ & }
 
 function grepcode {
 	dir=$2
 	find -L $dir -path '*/.svn' -prune -o -type f -print | grep -v "cscope" | grep -v "CMakeFiles" | xargs grep -Ine $1
+}
+
+function swap() {
+  tmpfile=$(mktemp -u $(dirname "$file1")/XXXXXX)
+  mv "$1" "$tmpfile"
+  mv "$2" "$1"
+  mv "$tmpfile" "$2"
 }
 
 KERNEL=`uname`
